@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="programs_list/programs_list.css">
+
+</head>
+
+<body>
+    <div class="programs_container">
+        <div class="function_line_container">
+            <div class="function_line">
+                <button class="function_line_back_btn">Назад</button>
+                <form class="function_line_search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск...">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
+        <div class="rev_slider">
+            <div class="slide" ng-repeat="p in programsList.content">
+                <div class="slide_inner">
+                    <div class="slide_inner_left">
+                        <div class="slide_inner_left_img">img</div>
+                        <div class="slide_inner_line">{{p.title}}</div>
+                        <div class="slide_inner_line">{{p.author}}</div>
+                    </div>
+                    <div class="slide_inner_right">
+                        <div class="slide_inner_line">Просмотры: {{p.views}}</div>
+                        <div class="slide_inner_line">Оценки: {{p.amount_scores}}</div>
+                        <div class="slide_inner_line">Комментарии: {{p.comments}}</div>
+                        <div class="slide_inner_line" id="rate_line">Рейтинг:
+                            <div class="rate_background">
+                                <div class="rate_bar" style="width:{{p.rating}}%;"></div>
+                            </div>
+                        </div>
+                        <div class="slide_inner_line">
+                            <button class="btn btn-primary" ng-click="openProgram(1)">Открыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

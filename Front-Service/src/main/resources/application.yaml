@@ -1,0 +1,4 @@
+server:
+  port: 8182
+  servlet:
+    context-path: /progworld

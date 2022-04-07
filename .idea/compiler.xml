@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Core-Service" />
+        <module name="Front-Service" />
+        <module name="API" />
+        <module name="Gateway" />
+        <module name="Auth-Service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="API" options="" />
+      <module name="Auth-Service" options="-parameters" />
+      <module name="Core-Service" options="-parameters" />
+      <module name="Front-Service" options="-parameters" />
+      <module name="Gateway" options="-parameters" />
+      <module name="programworld" options="-parameters" />
+    </option>
+  </component>
+</project>

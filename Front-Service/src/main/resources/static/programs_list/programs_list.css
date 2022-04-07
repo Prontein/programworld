@@ -1,0 +1,180 @@
+.programs_container {
+    width:1380px;
+}
+
+/* Строка поиска и фильтров*/
+
+.function_line_container {
+   padding: 0 30px;
+}
+
+.function_line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.function_line_container:after {
+   content:"";
+   display:block;
+   width: 100%;
+   margin: 1px auto 0;
+   border: 0.5px solid rgba(69, 69, 69, 0.12);
+   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.27);
+}
+
+.function_line_search {
+    display: flex;
+}
+
+/* Слайдер */
+.rev_slider {
+    position:relative;
+    padding: 0 30px;
+
+}
+
+.slick-track{
+margin: 0 auto;
+    display:flex;
+
+
+/*    align-items:flex-start;*/
+}
+
+.rev_slider .slick-arrow {
+    position:absolute;
+    top:35%;
+    z-index:10;
+    font-size:0;
+    width: 30px;
+    height: 126px;
+    border:0;
+}
+
+.rev_slider .slick-arrow.slick-prev{
+left:0;
+background: url('img/slideBackBtn.svg') 0 0 no-repeat;
+}
+
+.rev_slider .slick-arrow.slick-next{
+right:0;
+background: url('img/slideUpBtn.svg') 0 0 no-repeat;
+}
+
+.slide {
+margin-top: 10px;
+height: 260px;
+}
+
+.rev_slider .slick-dots{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.rev_slider .slick-dots li{
+    list-style: none;
+    margin: 0 10px;
+}
+
+.rev_slider .slick-dots button{
+    font-size: 0;
+    width:5px;
+    height:15px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.rev_slider .slick-dots li.slick-active button{
+    background-color: transparent;
+    border: 1px solid #fff;
+}
+
+
+/* Табличное представление */
+
+.slide_inner {
+    display:flex;
+    width:630px;
+    height:260px;
+    border-radius: 16px;
+    margin-right:56px;
+    border: double 4px transparent;
+    background-image: linear-gradient(to right, #dafffd, #dcfdff, #dffbff, #e3f8ff, #e7f6ff, #e7f6ff, #e6f5ff, #e6f5ff, #e2f6fe, #def7fc, #dcf8f9, #dbf9f5), radial-gradient(circle, #90f2ee, #54e1fa, #18ccff, #3fb3ff, #7f93ff, #9b86ff, #be73ff, #e456ff, #d170ff, #c083ff, #b392ff, #aa9efd);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+.slide_inner_left{
+    width:50%;
+    left:0;
+    top:0;
+    border-right: 4px solid green;
+    box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.25);
+    border-image: linear-gradient(to right, #90f2ee, #54e1fa, #18ccff, #3fb3ff, #7f93ff, #9b86ff, #be73ff, #e456ff, #d170ff, #c083ff, #b392ff, #aa9efd);
+    border-image-slice: 1;
+}
+
+.slide_inner_right{
+ width:50%;
+    right:0;
+    top:0;
+}
+
+.slide_inner_left_img{
+    height:140px;
+}
+
+.slide_inner_line {
+text-align: center;
+    height:52px;
+}
+
+#rate_line {
+    display:flex;
+    align-items: center;
+    padding-left:60px;
+}
+
+.slider_table_view {
+    margin-right:56px;
+    padding-left:15px;
+    width:630px;
+    height:260px;
+    border: 4px  solid;
+
+/*    border-image: linear-gradient(to right, #90f2ee, #54e1fa, #18ccff, #3fb3ff, #7f93ff, #9b86ff, #be73ff, #e456ff, #d170ff, #c083ff, #b392ff, #aa9efd);
+    border-image-slice: 1;*/
+    border-collapse: separate;
+    border-radius: 16px;
+    position:relative;
+/*    background-clip: padding-box;*/
+}
+
+.slider_table_view:after {
+    position: absolute;
+    top: -10px; bottom: -10px;
+    left: -10px; right: -10px;
+    content: '';
+    z-index: -10;
+    border-radius: 16px;
+    background-image: linear-gradient(to right, #90f2ee, #54e1fa, #18ccff, #3fb3ff, #7f93ff, #9b86ff, #be73ff, #e456ff, #d170ff, #c083ff, #b392ff, #aa9efd);
+}
+
+
+/* внешний контейнер - фон с серыми звездочками */
+.rate_background {
+    position: relative;
+    width: 80px;
+    height: 16px;
+    background:url('img/grayStar.png') repeat-x;
+}
+
+/* внутренний контейнер - полоса рейтинга с золотыми звездочками */
+.rate_bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 16px;
+    background:url('img/goldStar.png') repeat-x;
+}
