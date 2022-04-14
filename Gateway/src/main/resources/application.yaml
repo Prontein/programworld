@@ -16,14 +16,14 @@ spring:
               - OPTIONS
             allowedHeaders: "*"
       routes:
-#        - id: core-service
-#          uri: http://localhost:8080/
-#          predicates:
-#            - Path=/core/**
-#          filters:
-#            - StripPrefix=1
-#            - PrefixPath=/shop-core
-#            - JwtAuthFilter
+        - id: core-service
+          uri: http://localhost:8180/
+          predicates:
+            - Path=/core/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/site-core
+            - JwtAuthFilter
 #        - id: cart-service
 #          uri: http://localhost:8191/
 #          predicates:

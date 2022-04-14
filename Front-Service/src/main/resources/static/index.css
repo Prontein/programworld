@@ -3,7 +3,11 @@ body {
     font-family: 'Source Serif Pro', serif;
     font-size: 24px;
     color: #000000;
+}
 
+body.modal-open {
+    overflow: visible !important;
+    padding-right: 0px !important;
 }
 
 *,
@@ -25,17 +29,21 @@ h1,h2,h3,h4,h5,h6 {
 
 /* Content */
 .content {
+
     width: 100%;
-    height: 100vh;
-    background: url('img/main-background.jpg') no-repeat center;
+    height: 100%;
+/*    background: url('img/main-background.jpg') no-repeat center;*/
+    background: -webkit-linear-gradient(180deg, #000000,#ffffff);/* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(180deg, #000000,#ffffff);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
     padding-top:200px;
 }
 
 
+
 /* Header */
 .header {
-padding-top: 30px;
+/*padding-top: 30px;*/
     width: 100%;
     position: absolute;
     top:0;
@@ -48,9 +56,11 @@ padding-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position:relative;
 }
 
 .header_logo {
+z-index:1;
     display: inline-block;
     display: flex;
     align-items: center;
@@ -63,18 +73,85 @@ padding-top: 30px;
     line-height: 24px;
     text-align: center;
     text-decoration: none;
-    color: rgba(116, 36, 94, 0.78);
+    color: white;
 }
 
 .nav_header {
     font-size: 24px;
+
 }
 
+/*Шапка оформление*/
+.header_inner_background {
+    position:absolute;
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+svg {
+width:0;
+height:0;
+}
+
+.header_inner_background {
+    /*display: inline-block;*/
+
+    filter:url(#wavy) blur(1px);
+}
+
+.header_inner_background:before {
+    content:'';
+   position:absolute;
+   width:100%;
+   height:100%;
+   border:5px solid #fff;
+/*   box-shadow: 0 0 50px #0f0,inset 0 0 50px #0f0;*/
+   box-shadow: 0 0 50px #61e9ff,inset 0 0 50px #61e9ff;
+    -webkit-box-reflect: below 10px linear-gradient(transparent,transparent,#0002);
+/*    animation: animate-nav 5s linear infinite;*/
+}
+
+.header_inner_background:after {
+    content:'';
+    width:100%;
+    height:100%;
+    position:absolute;
+   border:5px solid #fff;
+   box-shadow: 0 0 10px #fff, inset 0 0 20px #fff;
+   border-left: solid;
+   border-right: solid;
+}
+/*
+@keyframes animate-nav{
+0% {
+        box-shadow: 0 0 20px #0cf, inset 0 0 20px #00ff004d;
+
+  }
+100% {
+    box-shadow: 0 0 20px #0cf, inset 0 0 20px #00ff004d;
+
+
+    }
+}
+*/
+/*Шапка оформление ссылок*/
+.circle{
+    filter: hue-rotate(310deg);
+width:100%;
+height:100%;
+position:absolute;
+background: url('img/space1.jpg') right;
+}
+
+
 .nav_header_link {
-    display: inline-block;
+    /*display: inline-block;
     /*vertical-align: top;*/
+
     margin: 0 15px;
-    color: black;
+    color: white;
+    position:sticky;
     text-decoration: none;
     transition: color 0.2s linear;
 }
@@ -91,6 +168,7 @@ color: red;
 
 .nav_header_user_link {
     margin: 0;
+    z-index:1;
 }
 
 .imgNotification {
@@ -100,7 +178,7 @@ color: red;
 .nav_header_user_link_authRequest {
     margin: 0;
     left:0;
-    width:175px;
+    width:170px;
     display: inline-block;
     text-align:center;
 }
@@ -130,15 +208,290 @@ color: red;
     min-width: 145px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    right: 0;
 }
 
 .hidden_user_content a {
     display: block;
 }
+/* Вкладка выйти из профиля*/
+.logoutBtn {
+   /* border-radius: 5px;
+    width: 155px;
+    font-size: 15px;
+    background: white;
+    color: black;*/
+}
+
+.logoutBtn,
+.logoutBtn::before,
+.logoutBtn::after,
+.logoutBtn span,
+.logoutBtn span::before,
+.logoutBtn span::after
+{
+  transition: all ease .5s;
+}
+
+.logoutBtn{
+    background: black;
+    color: white;
+    width: 152px;
+    font-size: 10px;
+    position: relative;
+    padding: 0.3em;
+    margin: 1em;
+    border: solid 1px;
+    cursor: pointer;
+
+}
+
+.logoutBtn:hover
+{
+  box-shadow: 0 0 5em .5em rgba(50,50,150,0.5);
+}
+
+.logoutBtn span
+{
+  display: inline-block;
+  width: 100%;
+  padding: 0.6em 2em;
+}
+
+.logoutBtn:hover span
+{
+  background-color: #fff;
+  color: #112;
+}
+
+.logoutBtn::before,
+.logoutBtn::after,
+.logoutBtn span::before,
+.logoutBtn span::after
+{
+  content: '';
+  position: absolute;
+  border: 1px;
+}
+
+.logoutBtn::before,
+.logoutBtn span::before
+{
+  border-style: solid none;
+}
+
+.logoutBtn::before,
+.logoutBtn span::after{
+  left: 0;
+  top: -0.4em;
+  width: 100%;
+  height: calc(100% + 0.8em);
+}
+
+.logoutBtn::after,
+.logoutBtn span::after
+{
+  border-style: none solid;
+}
+
+.logoutBtn::after,
+.logoutBtn span::before
+{
+  top: 0;
+  left: -0.4em;
+  height: 100%;
+  width: calc(100% + 0.8em);
+}
+
+.logoutBtn:hover::after,
+.logoutBtn:hover span::after
+{
+  transform: scaleY(0);
+}
+
+.logoutBtn:hover::before,
+.logoutBtn:hover span::before
+{
+  transform: scaleX(0);
+}
+
+.logoutBtn:hover span::after,
+.logoutBtn:hover span::before
+{
+  opacity: 0;
+}
+
+
+
 
 /* Модальное окно*/
 
+/* Кнопка войти*/
+#openModalBtn {
+z-index:1;
+  min-width: 62px;
+  min-height: 41px;
+  color: #313133;
+  background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(251,203,239,1) 0%, rgba(245,253,157,1) 100%);
+  border: none;
+  border-radius: 10px;
+/*  box-shadow: 12px 12px 24px rgba(79,209,197,.64);*/
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  }
 
+#openModalBtn::before {
+content: '';
+  border-radius: 12px;
+  min-width: calc(62px + 4px);
+  min-height: calc(41px + 2px);
+  border: 2px solid #fbadff94;
+  box-shadow: 0 0 60px rgba(254,251,118,1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+#openModalBtn:hover, #openModalBtn:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+#openModalBtn:hover::before, #openModalBtn:focus::before {
+  opacity: 1;
+}
+
+#openModalBtn::after {
+  content: '';
+  width: 30px; height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00ffcb00;
+  position: absolute;
+/*  z-index: -1;*/
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 3s;
+  animation-iteration-count:3;
+}
+
+#openModalBtn:hover::after, #openModalBtn:focus::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+
+    box-shadow: 0 0 50px #0f0, inset 0 0 50px #0f0;
+    filter: hue-rotate(0deg);
+
+  }
+    20% {
+        box-shadow: 0 0 60px #0f0, inset 0 0 60px #0f0
+
+    }
+    40% {
+        box-shadow: 0 0 40px #0f0, inset 0 0 40px #0f0
+
+    }
+    60% {
+        box-shadow: 0 0 80px #0f0, inset 0 0 80px #0f0
+
+    }
+    80% {
+        box-shadow: 0 0 100px #0f0, inset 0 0 100px #0f0
+
+    }
+  100% {
+    box-shadow: 0 0 50px #0f0, inset 0 0 50px #0f0;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    filter: hue-rotate(360deg);
+  }
+}
+
+/*Кнопка регистарции*/
+
+#openModalRegBtn {
+    min-width:100px;
+    min-height: 41px;
+    padding: 10px;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(251,203,239,1) 0%, rgba(245,253,157,1) 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+#openModalRegBtn::before {
+    content: '';
+  border-radius: 10px;
+  min-width: calc(100px + 2px);
+  min-height: calc(41px + 2px);
+  border: 2px solid #fbadff94;
+  box-shadow: 0 0 60px rgba(254,251,118,1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+#openModalRegBtn:hover, #openModalRegBtn:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+#openModalRegBtn:hover::before, #openModalRegBtn:focus::before {
+  opacity: 1;
+}
+
+#authFormGroup{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+}
+
+.input-group-auth {
+    align-items:center;
+    display:flex;
+}
+
+#navLoginSubmit {
+    margin-top: 10px;
+    width: 100%;
+}
+/*Форма регистарции*/
+.registration-modal-body {
+    height:600px;
+}
+
+.registration-form {
+  margin-bottom: 16px;
+}
+
+.registration-form input:required {
+ border: 1px solid red;
+}
+
+#navRegistrationBtn {
+    width: 100%;
+}
 
 /* Content-inner*/
 
@@ -245,7 +598,7 @@ color: red;
 /* Footer */
 .footer {
     width: 100%;
-    position: absolute;
+ /*   position: absolute;*/
     bottom: 0;
     left: 0;
     z-index: 1;
@@ -263,8 +616,10 @@ color: red;
 @media (min-width: 1400px) {
     .container {
         min-width: 1770px;
+
     }
     .content{
         min-width: 1770px;
+        min-height: 100vh;
     }
 }

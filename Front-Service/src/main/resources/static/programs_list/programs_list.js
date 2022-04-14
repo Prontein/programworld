@@ -1,6 +1,9 @@
 
-angular.module('program').controller('programs_listController', function ($scope, $http,$location ) {
+angular.module('program').controller('programs_listController', function ($scope, $http,$location,$routeParams) {
 
+   $scope.openProgram = function(programId) {
+        $location.path('/types_prog_languages/programs_list/' + programId);
+    }
 
     $(function() {
         $('.rev_slider').slick({

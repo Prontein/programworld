@@ -1,6 +1,6 @@
 (function (){
     angular
-        .module('program', ['ngRoute', 'ngStorage'])
+        .module('program', ['ngRoute', 'ngStorage','ngSanitize'])
         .config(config)
         .run(run);
 
@@ -19,6 +19,10 @@
                 templateUrl: 'programs_list/programs_list.html',
                 controller: 'programs_listController'
             })
+             .when('/types_prog_languages/programs_list/:programId', {
+                templateUrl: 'program-view/program-view.html',
+                controller: 'program-viewController'
+            })
 
             .otherwise({
                 redirectTo: '/'
@@ -33,8 +37,18 @@
 
 angular.module('program').controller('indexController', function ($rootScope, $scope, $http, $localStorage,$location) {
     const authPath = 'http://localhost:5555/auth/';
-
+    $scope.passwordType = "password";
+    $scope.passwordTypeReg = "password";
      $scope.tryToAuth = function () {
+
+         if ($scope.user == null) {
+             alert('Вы не ввели логин');
+             return;
+         }
+         if ($scope.user.password == null) {
+             alert('Вы не ввели пароль');
+             return;
+         }
             $http.post(authPath + 'api/v1/auth', $scope.user)
                 .then(function successCallback(response) {
                     if (response.data.token) {
@@ -43,8 +57,11 @@ angular.module('program').controller('indexController', function ($rootScope, $s
 
                         $scope.user.username = null;
                         $scope.user.password = null;
+                         $('#exampleModal').modal('hide');
                     }
                 }, function errorCallback(response) {
+                console.log(response.data.messages);
+                alert(response.data.messages);
                 });
         };
 
@@ -72,7 +89,50 @@ angular.module('program').controller('indexController', function ($rootScope, $s
             }
         };
 
+    $scope.registrationUser = function () {
+        if ($scope.new_user == null) {
+            alert('Вы не заполнили поля');
+            return;
+        }
+        if ($scope.new_user.password != $scope.new_user.matchingPassword) {
+            alert('Пароли не совпадают');
+            return;
+        }
+        $http.post(authPath + 'api/v1/registration', $scope.new_user)
+            .then(function successCallback (response) {
+                $scope.new_user = null;
+                alert("Регистрация прошла успешно");
+                $('#registrationModal').modal('hide');
+            }, function failureCallback (response) {
+                console.log(response);
+                alert(response.data.messages);
+        });
+    };
+
     $scope.openProgram = function() {
         $location.path('/types_prog_languages');
     }
+
+
+    $scope.showPassword = function () {
+        if ($scope.passwordType == "password") {
+            $scope.passwordType = "text";
+            angular.element(document.querySelector("#passHideLogo")).addClass('bi bi-eye').removeClass('bi bi-eye-slash');
+        } else {
+            $scope.passwordType = "password";
+            angular.element(document.querySelector("#passHideLogo")).addClass('bi bi-eye-slash').removeClass('bi bi-eye');
+        }
+
+    };
+
+    $scope.showRegPassword = function () {
+        if ($scope.passwordTypeReg == "password") {
+            $scope.passwordTypeReg = "text";
+            angular.element(document.querySelector("#passRegHideLogo")).addClass('bi bi-eye').removeClass('bi bi-eye-slash');
+        } else {
+            $scope.passwordTypeReg = "password";
+            angular.element(document.querySelector("#passRegHideLogo")).addClass('bi bi-eye-slash').removeClass('bi bi-eye');
+        }
+    };
+
 });

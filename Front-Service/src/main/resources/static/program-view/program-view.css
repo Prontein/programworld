@@ -1,0 +1,11 @@
+.programs_container {
+    width:1380px;
+    padding: 0 30px;
+    background:white;
+    border:2px solid;
+    border-radius:20px;
+}
+
+.liText {
+    list-style-type: circle;
+}

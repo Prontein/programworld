@@ -14,28 +14,41 @@
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+    <script src="https:////ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
 </head>
 
-<body ng-app="program" ng-controller="indexController">
+<body ng-app="program" ng-controller="indexController" style="visibility: hidden"
+      onload="setTimeout ('document.body.style.visibility = \'visible\'', 30)">
     <header class="header">
         <div class="container">
             <div class="header_inner">
+                <div class="header_inner_background">
+                    <div class="circle"></div>
+                </div>
                 <div class="header_logo">
                     <a class="header_logo_img" href="#">
-                        <img src="img/siteIcon.png">
+                        <img src="img/siteIcon.png" style="filter: drop-shadow(2px 4px 23px white);">
                     </a>
                     <a class="header_logo_text" href="#">Program World</a>
                 </div>
-
                 <nav class="nav_header">
-                    <a class="nav_header_link" href="#">Главная страница</a>
-                    <a class="nav_header_link" href="#">Доп.меню</a>
-                    <a class="nav_header_link" href="#">Контакты</a>
-                    <a class="nav_header_link" href="#">О проекте</a>
+                        <a class="nav_header_link" href="#">Главная страница</a>
+                    <svg>
+                        <filter id="wavy">
+                            <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
+                                <animate attributeName="baseFrequency" dur="150s" values="0.02;0.005;0.02" repeatCount="indefinite"></animate>
+                            </feTurbulence>
+                            <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+                        </filter>
+                    </svg>
+                        <a class="nav_header_link" href="#">Доп.меню</a>
+                        <a class="nav_header_link" href="#">Контакты</a>
+                        <a class="nav_header_link" href="#">О проекте</a>
                 </nav>
                 <nav class="nav_header_user" ng-show="isUserLoggedIn()">
                     <a class="nav_header_user_link" href="#">
@@ -44,38 +57,20 @@
                     <a class="nav_header_user_link" href="#">
                         <img class="userMessage" src="img/messageIcon.png">
                     </a>
-<!--                    <a class="nav_header_user_link" href="#">-->
-<!--                        <img src="img/iconUser.png">-->
-<!--                    </a>-->
                     <div class="nav_header_user_link_userIcon">
                         <img class="userIconImg" src="img/iconUser.png">
                         <div class='hidden_user_content'>
                             <a class="nav-item" style="padding: 4px;">
-                                <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти из профиля</button>
+                                <button class="logoutBtn" ng-click="tryToLogout()"><span>Выйти из профиля</span></button>
                             </a>
                         </div>
                     </div>
                 </nav>
                 <nav class="nav_header_user_link_authRequest" ng-show="!isUserLoggedIn()">
-                    <span>Вы не авторизованы</span>
-                    <!-- Кнопка-триггер модального окна -->
-<!--                    <button class="btn btn-outline-warning btn-sm" ng-click="navToRegistration()">Войти</button>-->
-                    <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Войти</button>
-                    <button class="btn btn-outline-warning btn-sm" ng-click="navToRegistration()">Регистрация</button>
 
-<!--                    <div class='hidden_user_content_authRequest'>-->
-<!--                        <form class="align-middle" ng-submit="tryToAuth()">-->
-<!--                            <div class="input-group input-group-sm" style="padding: 4px;">-->
-<!--                                <input id="navLoginField" class="form-control" ng-model="user.username" type="text"-->
-<!--                                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">Логин-->
-<!--                                <input id="navPasswordField" class="form-control" ng-model="user.password" type="password"-->
-<!--                                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">Пароль-->
-<!--                                <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"-->
-<!--                                        style="margin-left: 10px;" type="submit">Войти-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
+                    <!-- Кнопка-триггер модального окна -->
+                    <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" id="openModalBtn" data-bs-target="#exampleModal">Войти</button>
+                    <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" id="openModalRegBtn" data-bs-target="#registrationModal">Регистрация</button>
                 </nav>
             </div>
         </div>
@@ -120,34 +115,141 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body">
-                    <form  ng-submit="tryToAuth()">
-                        <div class="input-group input-group-sm">
-                        <div class="row">
-                            <div class="col">
-                                    <label for="inputLogin">Login</label>
-                                    <input type="text" class="form-control" ng-model="user.username" placeholder="Login" id="inputLogin">
-                                    <small id="loginHelp" class="form-text text-muted" >
-                                        Enter you login
-                                    </small>
+                    <form  ng-submit="tryToAuth()" class="form-horizontal">
+                        <div class="input-group input-group-sm" id="authFormGroup">
+                            <div class="row" style="margin-left: 0px;padding-bottom: 15px;">
+<!--                                <div class="input-group-auth">-->
+                                <div class="col-sm-4" style="text-align: right;width: 120px;">
+                                    <label for="inputLogin" style="padding-top: 5px;">Логин: </label>
+                                </div>
+                                    <div class="col-sm-8" >
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="inputLoginPrepend">
+                                                <i class="bi bi-person-badge-fill"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="user.username" id="inputLogin" pattern=".{4,}"
+                                                   aria-describedby="inputLoginPrepend" placeholder="Логин / Username" required>
+                                        </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                    <label for="inputPass">Password</label>
-                                    <input type="password" class="form-control" ng-model="user.password" placeholder="Password" id="inputPass">
-                                    <small id="passHelp" class="form-text text-muted" >
-                                        Enter you password
-                                    </small>
+                            <div class="row" style="margin-left: 0px;">
+<!--                                <div class="input-group-auth">-->
+                                <div class="col-sm-4" style="text-align: right;width: 120px;">
+                                    <label for="inputPass" style="padding-top: 5px;">Пароль: </label>
+                                </div>
+                                <div class="col-sm-8" >
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="inputPassPrepend">
+                                            <i class="bi bi-key"></i>
+                                        </span>
+                                        <input type="{{passwordType}}" class="form-control" id="inputPass" ng-model="user.password"
+                                           placeholder="Пароль / Password" aria-describedby="inputPassPrepend" required>
+                                        <span class="input-group-text" id="pass-control" ng-click="showPassword()">
+                                            <i id="passHideLogo" class="bi bi-eye-slash" ></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"
-                                style="margin-left: 10px;" type="submit" data-bs-dismiss="modal">Войти
+                        <div class="col-md-6 offset-md-7" style="margin-top: 10px;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+                                <label class="form-check-label" for="invalidCheck2">
+                                    Запомнить меня?
+                                </label>
+                            </div>
+                        </div>
+                        <button id="navLoginSubmit" class="btn btn-outline-success"
+                                type="submit">Войти
                         </button>
-                        </div>
+
                     </form>
                 </div>
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
-<!--                    <button type="button" class="btn btn-primary">Сохранить изменения</button>-->
-<!--                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registrationModalLabel">Регистрация</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body" id="registration-modal-body">
+                    <div class="container-fluid">
+                        <form  ng-submit="registrationUser()">
+                            <div class="registration-form">
+                                <input type="text" class="form-control" ng-model="new_user.firstName" placeholder="Имя / FirstName" id="inputFirstName" pattern=".{2,}" required>
+                            </div>
+                            <div class="registration-form">
+                                <input type="text" class="form-control" ng-model="new_user.lastName" placeholder="Фамилия / LastName" id="inputLastName">
+                            </div>
+                            <div class="registration-form">
+                                <div class="input-group">
+<!--                                <label for="inputNewLogin">Логин / Username</label>-->
+                                <span class="input-group-text" id="inputRegLoginPrepend">
+                                    <i class="bi bi-person-badge-fill"></i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="new_user.username" placeholder="Логин / Username"
+                                       aria-describedby="inputRegLoginPrepend" id="inputNewLogin" pattern=".{4,}" required>
+
+                                </div> <small id="newLoginHelp" class="form-text text-muted" >
+                                Four or more characters
+                            </small>
+                            </div>
+                            <div class="registration-form">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="inputRegPassPrepend">
+                                        <i class="bi bi-key"></i>
+                                    </span>
+<!--                                <label for="inputPassNewUser">Пароль / Password</label>-->
+                                    <input type="{{passwordTypeReg}}" class="form-control" ng-model="new_user.password" placeholder="Пароль / Password"
+                                           aria-describedby="inputRegPassPrepend" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="inputPassNewUser" required>
+                                    <span class="input-group-text" id="pass-reg-control" ng-click="showRegPassword()">
+                                            <i id="passRegHideLogo" class="bi bi-eye-slash" ></i>
+                                        </span>
+                                </div>
+                                <small id="passHelpNewUser" class="form-text text-muted" >
+                                    Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters
+                                </small>
+                            </div>
+                            <div class="registration-form">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="inputRegPassPrependRepeat">
+                                        <i class="bi bi-key"></i>
+                                    </span>
+<!--                                <label for="repeatPassNewUser">Повторите пароль / Repeat the password</label>-->
+                                <input type="password" class="form-control" ng-model="new_user.matchingPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                                       aria-describedby="inputRegPassPrependRepeat" placeholder="Повторите пароль / Repeat the password" id="repeatPassNewUser" required>
+                                </div>
+                                <small id="helpRepeatPass" class="form-text text-muted" >
+                                    Повторите пароль / Repeat the password
+                                </small>
+                            </div>
+                            <div class="registration-form">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="inputEmailPrepend">
+                                        <i>@</i>
+                                    </span>
+<!--                                <label for="inputEmail">Электронная почта / E-mail</label>-->
+                                <input type="email" class="form-control" ng-model="new_user.email" aria-describedby="input-group-text"
+                                       placeholder="Электронная почта / E-mail" id="inputEmail" required>
+<!--                                <small id="helpEmail" class="form-text text-muted" >-->
+<!--                                    Ваша электронную почту / Your email address-->
+<!--                                </small>-->
+                                </div>
+                            </div>
+                            <button id="navRegistrationBtn" class="btn btn-outline-success"
+                                    type="submit">Регистрация
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!--                <div class="modal-footer">-->
+                <!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
+                <!--                    <button type="button" class="btn btn-primary">Сохранить изменения</button>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -156,7 +258,9 @@
     <script src="types_prog_languages/types_prog_languages.js"></script>
     <script src="welcome/welcome.js"></script>
     <script src="programs_list/programs_list.js"></script>
+    <script src="program-view/program-view.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 </body>
 
 </html>
