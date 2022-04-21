@@ -23,6 +23,10 @@
                 templateUrl: 'program-view/program-view.html',
                 controller: 'program-viewController'
             })
+            .when('/moderator_panel', {
+                templateUrl: 'moderator_panel/moderator_panel.html',
+                controller: 'moderator_panelController'
+            })
 
             .otherwise({
                 redirectTo: '/'
@@ -134,5 +138,12 @@ angular.module('program').controller('indexController', function ($rootScope, $s
             angular.element(document.querySelector("#passRegHideLogo")).addClass('bi bi-eye-slash').removeClass('bi bi-eye');
         }
     };
-
+/*
+    $(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });
+hljs.initHighlightingOnLoad();
+*/
 });

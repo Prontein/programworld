@@ -6,6 +6,20 @@
     border-radius:20px;
 }
 
+.tab-content {
+    padding-top:20px;
+}
+
+.functional {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article_materials {
+    display: flex;
+    justify-content: space-between;
+}
+
 .liText {
     list-style-type: circle;
 }
@@ -20,3 +34,9 @@
     margin-right: auto;
     width: 50%;
 }
+
+.td {
+    text-align: center;
+}
+
+

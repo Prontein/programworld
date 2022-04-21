@@ -20,4 +20,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new SiteError(e.getMessages()), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<?> catchUserAlreadyExistException(ArticleAlreadyExistException e) {
+        return new ResponseEntity<>(new ArticleAlreadyExistException(e.getMessages()), HttpStatus.BAD_REQUEST);
+    }
+
 }

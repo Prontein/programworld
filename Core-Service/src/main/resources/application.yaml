@@ -14,3 +14,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
     open-in-view: false
+
+
+upload:
+  path: C:/Users/Ilya/Desktop/MyProject/materials

@@ -10,10 +10,62 @@ import java.math.BigDecimal;
 
 public class ArticleDTO {
     private Long id;
+    private String fileName;
+    private String fileType;
+    private String author;
+    private String title;
+    private String progLanguage;
 
-    private String content;
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getProgLanguage() {
+        return progLanguage;
+    }
+
+    public void setProgLanguage(String progLanguage) {
+        this.progLanguage = progLanguage;
+    }
 
     public ArticleDTO() {
+    }
+
+    public ArticleDTO(Long id, String author, String title, String progLanguage, String fileName, String fileType) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.progLanguage = progLanguage;
+        this.fileName = fileName;
+        this.fileType = fileType;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
     public Long getId() {
@@ -22,18 +74,5 @@ public class ArticleDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public ArticleDTO(Long id, String content) {
-        this.id = id;
-        this.content = content;
     }
 }
