@@ -2,7 +2,7 @@
 angular.module('program').controller('moderator_panelController', function ($scope, $http,$location,$routeParams,$sce) {
     const contextPath = 'http://localhost:5555/core/';
    $scope.content1='';
-   $scope.selectArticle='';
+
 
 
   /*  $scope.readArticle = function () {
@@ -33,7 +33,6 @@ angular.module('program').controller('moderator_panelController', function ($sco
         reader.onload = function(evt) {
             $scope.$apply(function() {
                 let res = reader.result;
-                console.log(res);
                 $scope.content1 = $sce.trustAsHtml(res);
 
             });
@@ -73,8 +72,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
         let file = document.getElementById('ImageMedias').files[0];
         var fd = new FormData();
         fd.append('ImageMedias', file);
-    /*    $http.post(contextPath + 'api/v1/articles/upload/local', fd, {*/
-        $http.post(contextPath + 'api/v1/articles/upload/local/' + $scope.new_article.progLanguage + $scope.new_article.id, fd, {
+        $http.post(contextPath + 'api/v1/images/' + $scope.new_article.id, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
             })
@@ -106,7 +104,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
             }
         });
 
-    $scope.showArticles = function () {
+    $scope.getArticles = function () {
         $http({
             url: contextPath + 'api/v1/articles',
             method: 'GET',
@@ -120,20 +118,72 @@ angular.module('program').controller('moderator_panelController', function ($sco
         $scope.selectArticle = article;
     }
 
+    $scope.isAnyImages = function () {
+        if ($scope.selectArticle == null || Object.keys($scope.selectArticle.images).length == 0 ) {
+            return false;
+        } else {return true;}
+    }
+
+   $scope.addImage = function (articleId) {
+        let file = document.getElementById('addImage').files[0];
+        var fd = new FormData();
+        fd.append('ImageMedias', file);
+        $http.post(contextPath + 'api/v1/images/' + articleId, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+            })
+            .then(function successCallback (response) {
+                console.log(response);
+            }, function errorCallback(response) {
+               console.log(response.data.messages);
+               alert(response.data.messages);
+               });
+    }
+
+    $("#addImage").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#addImageMediaPreview");
+            dvPreview.html("");
+            $($(this)[0].files).each(function () {
+                var file = $(this);
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("style", "width: 150px; height:100px; padding: 10px");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
+                    }
+                    reader.readAsDataURL(file[0]);
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    });
+
     $scope.openArticleForEdit = function (articleId) {
         let file = document.getElementById('fileEdit').files[0];
         var fd = new FormData();
         fd.append('fileEdit', file);
-        $http.post(contextPath + 'api/v1/articles/edit/' + articleId, fd, {
+        fd.append('selectArticle',new Blob([JSON.stringify($scope.selectArticle)], {type: "application/json"}));
+
+        $http.put(contextPath + 'api/v1/articles/edit/' + articleId, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
             })
             .then(function successCallback (response) {
             console.log(response.data);
             }, function errorCallback(response) {
-            console.log(response.data.messages);
-            alert(response.data.messages);
+            console.log(response.data);
+            alert(response.data);
         });
     }
 
+    $scope.deleteImage = function (id) {
+        $http({
+            url: contextPath + 'api/v1/images/' + id,
+            method: 'DELETE'
+        }).then(function (response) {
+            console.log(response);
+        });
+    }
 });

@@ -32,26 +32,6 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
-    public void uploadToLocal(MultipartFile file, String articleImgFolder) {
-        if (file != null) {
-            File uploadDir = new File(uploadPath + "/" + articleImgFolder);
-            if(!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-        }
-        try {
-            byte[] data = file.getBytes();
-//            Path path = Paths.get(getServerCatalogPath() + "/uploaded_" + file.getOriginalFilename());
-            Path path = Paths.get(uploadPath + "/" + articleImgFolder + "/uploaded_" + file.getOriginalFilename());
-            System.out.println(uploadPath + "/uploaded_" + file.getOriginalFilename());
-            Files.write(path,data);
-            System.out.println(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     @Transactional
     public Article uploadToDb(MultipartFile file, ArticleDTO articleDTO) {
 
@@ -60,6 +40,7 @@ public class ArticleService {
         }
        Article article = new Article();
         try {
+
             article.setContent(file.getBytes());
             article.setFileType(file.getContentType());
             article.setFileName(file.getOriginalFilename());
@@ -73,10 +54,14 @@ public class ArticleService {
         }
     }
 
-    public Article editingInDb(Long id, MultipartFile file) {
-        Article article = findById(id).orElseThrow(() -> new ResourceNotFoundException("Article id = " + id + " not found"));
+    public Article editingInDb(Long id, MultipartFile file, ArticleDTO articleDTO) {
+
+        Article article = articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article id = " + id + " not found"));
         try {
             article.setContent(file.getBytes());
+            article.setAuthor(articleDTO.getAuthor());
+            article.setTitle(articleDTO.getTitle());
+            article.setProgLanguage(articleDTO.getProgLanguage());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,6 +72,7 @@ public class ArticleService {
         return articleRepository.findByFileName(fileName).isPresent();
     }
 
+    @Transactional
     public List<Article> findAllArticles() {
         return articleRepository.findAll();
     }
@@ -94,5 +80,10 @@ public class ArticleService {
     public Path getServerCatalogPath() {
         Path currentPath = Paths.get("materials");
         return  currentPath.normalize().toAbsolutePath();
+    }
+
+    @Transactional
+    public List<Article> findAllArticlesForClient(String program_language) {
+        return articleRepository.findAllByProgLanguage(program_language);
     }
 }

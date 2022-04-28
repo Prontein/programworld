@@ -4,10 +4,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.List;
 
 @Entity
 @Table(name = "articles")
 @Data
+@NamedEntityGraph(name = "Article.images",
+        attributeNodes = @NamedAttributeNode("images")
+)
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +35,7 @@ public class Article {
 
     @Lob
     private byte[] content;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Image> images;
 }

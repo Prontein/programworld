@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class ArticleDTO {
@@ -15,6 +16,33 @@ public class ArticleDTO {
     private String author;
     private String title;
     private String progLanguage;
+    private List<ImageDTO> images;
+
+    public ArticleDTO() {
+    }
+
+    public ArticleDTO(Long id, String author, String title, String progLanguage) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.progLanguage = progLanguage;
+    }
+    public ArticleDTO(Long id, String author, String title, String progLanguage, String fileName, String fileType, List<ImageDTO> images) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.progLanguage = progLanguage;
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.images = images;
+    }
+    public List<ImageDTO> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageDTO> images) {
+        this.images = images;
+    }
 
     public String getAuthor() {
         return author;
@@ -38,18 +66,6 @@ public class ArticleDTO {
 
     public void setProgLanguage(String progLanguage) {
         this.progLanguage = progLanguage;
-    }
-
-    public ArticleDTO() {
-    }
-
-    public ArticleDTO(Long id, String author, String title, String progLanguage, String fileName, String fileType) {
-        this.id = id;
-        this.author = author;
-        this.title = title;
-        this.progLanguage = progLanguage;
-        this.fileName = fileName;
-        this.fileType = fileType;
     }
 
     public String getFileName() {

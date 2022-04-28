@@ -1,4 +1,4 @@
-angular.module('program').controller('types_prog_languagesController', function ($scope, $http,$location ) {
+angular.module('program').controller('types_prog_languagesController', function ($scope, $http,$location,$routeParams ) {
     const contexPath = 'http://localhost:8182/pmworld';
 
 //    var updateTime=function(){content_type_container.style.display="block"}
@@ -7,6 +7,7 @@ angular.module('program').controller('types_prog_languagesController', function 
 
 
     $scope.openJavaProgram = function() {
-        $location.path('/types_prog_languages/programs_list');
+        var program_language = 'Java';
+        $location.path('/types_prog_languages/programs_list/' + program_language);
     }
 });

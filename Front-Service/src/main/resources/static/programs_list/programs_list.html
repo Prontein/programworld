@@ -17,27 +17,50 @@
                 </form>
             </div>
         </div>
-        <div class="rev_slider">
-            <div class="slide" ng-repeat="p in programsList.content">
+        <div class="rev_slider" >
+<!--            <div class="slide" ng-repeat="p in programsList.content">-->
+            <div class="slide" ng-repeat="a in articles">
                 <div class="slide_inner">
-                    <div class="slide_inner_left">
-                        <div class="slide_inner_left_img">img</div>
-                        <div class="slide_inner_line">{{p.title}}</div>
-                        <div class="slide_inner_line">{{p.author}}</div>
-                    </div>
-                    <div class="slide_inner_right">
-                        <div class="slide_inner_line">Просмотры: {{p.views}}</div>
-                        <div class="slide_inner_line">Оценки: {{p.amount_scores}}</div>
-                        <div class="slide_inner_line">Комментарии: {{p.comments}}</div>
-                        <div class="slide_inner_line" id="rate_line">Рейтинг:
-                            <div class="rate_background">
-                                <div class="rate_bar" style="width:{{p.rating}}%;"></div>
+<!--                    <div class="article_info_container">-->
+                        <div class="front">
+                            <div class="slide_inner_line">{{a.title}}</div>
+                            <div class="slide_inner_line">{{a.author}}</div>
+<!--                            <img src="types_prog_languages/img/javaBtn.jpg" alt="">-->
+                        </div>
+                        <div class="back">
+                            <div class="back-content">
+                                <div class="slide_inner_line">Просмотры: {{a.views}}</div>
+                                <div class="slide_inner_line">Оценки: {{a.amount_scores}}</div>
+                                <div class="slide_inner_line">Комментарии: {{a.comments}}</div>
+                                <div class="slide_inner_line" id="rate_line">Рейтинг:
+                                    <div class="rate_background">
+                                        <div class="rate_bar" style="width:{{p.rating}}%;"></div>
+                                    </div>
+                                </div>
+                                <div class="slide_inner_line">
+                                    <button class="btn btn-primary" ng-click="openProgram(a.id)">Открыть</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="slide_inner_line">
-                            <button class="btn btn-primary" ng-click="openProgram(p.id)">Открыть</button>
-                        </div>
-                    </div>
+<!--                    </div>-->
+<!--                    <div class="slide_inner_left">-->
+<!--                        <div class="slide_inner_left_img">img</div>-->
+<!--                        <div class="slide_inner_line">{{p.title}}</div>-->
+<!--                        <div class="slide_inner_line">{{p.author}}</div>-->
+<!--                    </div>-->
+<!--                    <div class="slide_inner_right">-->
+<!--                        <div class="slide_inner_line">Просмотры: {{p.views}}</div>-->
+<!--                        <div class="slide_inner_line">Оценки: {{p.amount_scores}}</div>-->
+<!--                        <div class="slide_inner_line">Комментарии: {{p.comments}}</div>-->
+<!--                        <div class="slide_inner_line" id="rate_line">Рейтинг:-->
+<!--                            <div class="rate_background">-->
+<!--                                <div class="rate_bar" style="width:{{p.rating}}%;"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="slide_inner_line">-->
+<!--                            <button class="btn btn-primary" ng-click="openProgram(p.id)">Открыть</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

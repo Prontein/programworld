@@ -35,11 +35,6 @@ public class ArticleController {
     public List<ArticleDTO> getAllArticles() {
         return articleService.findAllArticles().stream().map(o -> converter.articleToDto(o)).collect(Collectors.toList());
     }
-    
-    @PostMapping("/upload/local/{articleName}")
-    public void uploadArticle(@PathVariable String articleName,@RequestParam("ImageMedias")MultipartFile multipartFile) {
-        articleService.uploadToLocal(multipartFile,articleName);
-    }
 
     @PostMapping(value = "/upload/db", consumes = { "multipart/form-data" })
 //    public ArticleUploadResponse uploadArticleToDb(@RequestParam("file")MultipartFile multipartFile) {
@@ -65,15 +60,19 @@ public class ArticleController {
 //        return articleUploadResponse;
     }
 
-    @PostMapping("/edit/{id}")
-    public ArticleUploadResponse editingArticleInDb(@PathVariable Long id,@RequestParam("fileEdit")MultipartFile multipartFile) {
-        Article article = articleService.editingInDb(id,multipartFile);
+    @PutMapping("/{id}")
+    public ArticleUploadResponse editingArticleInDb(@PathVariable Long id,@RequestPart("fileEdit")MultipartFile multipartFile, @RequestPart("selectArticle") ArticleDTO articleDTO) {
+
+        Article article = articleService.editingInDb(id,multipartFile,articleDTO);
         ArticleUploadResponse articleUploadResponse = new ArticleUploadResponse();
 //        if (article != null) {
         String downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/api/v1/articles/")
                 .path(String.valueOf(article.getId()))
                 .toUriString();
+        articleUploadResponse.setAuthor(articleDTO.getAuthor());
+        articleUploadResponse.setTitle(articleDTO.getTitle());
+        articleUploadResponse.setProgLanguage(articleDTO.getProgLanguage());
         articleUploadResponse.setDownloadUri(downloadUrl);
         articleUploadResponse.setArticleId(article.getId());
         articleUploadResponse.setFileType(article.getFileType());
@@ -85,14 +84,20 @@ public class ArticleController {
 //        return articleUploadResponse;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
-        Article article = articleService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article id = " + id + " not found"));
-
-       return ResponseEntity.ok()
-               .contentType(MediaType.parseMediaType(article.getFileType()))
-               .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + article.getFileName())
-               .body(article.getContent());
-//               .body(new ByteArrayResource(article.getContent()));
+    @GetMapping("/{program_language}")
+    public List<ArticleDTO> findById(@PathVariable String program_language) {
+        return articleService.findAllArticlesForClient(program_language).stream().map(converter::articleToDtoForClient).collect(Collectors.toList());
     }
+
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity findById(@PathVariable Long id) {
+//        Article article = articleService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article id = " + id + " not found"));
+//
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.parseMediaType(article.getFileType()))
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + article.getFileName())
+//                .body(article.getContent());
+////               .body(new ByteArrayResource(article.getContent()));
+//    }
 }

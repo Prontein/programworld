@@ -15,7 +15,8 @@
                 templateUrl: 'types_prog_languages/types_prog_languages.html',
                 controller: 'types_prog_languagesController'
             })
-             .when('/types_prog_languages/programs_list', {
+       /*      .when('/types_prog_languages/programs_list', {*/
+             .when('/types_prog_languages/programs_list/:program_language', {
                 templateUrl: 'programs_list/programs_list.html',
                 controller: 'programs_listController'
             })

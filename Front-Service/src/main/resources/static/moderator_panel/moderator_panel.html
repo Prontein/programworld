@@ -47,7 +47,7 @@
 <!--                    <input type="file" id="fileImg" >-->
 <!--                    <button ng-click="previewImg()">Просмотр</button>-->
                     <form>
-                    <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="new_article.progLanguage">
+<!--                    <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="new_article.progLanguage">-->
                     <input class="form-control" type="text" placeholder="ID статьи"  ng-model="new_article.id">
                     <div class="article_materials">
                         <input id="ImageMedias" multiple="multiple" name="ImageMedias" type="file"
@@ -62,12 +62,13 @@
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="edit_article_content">
 <!--                    <span>Редактирование статьи:</span>-->
-                    <button ng-click="showArticles()">Просмотр статей</button>
+                    <button ng-click="getArticles()">Просмотр статей</button>
 
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
                             <form  enctype="multipart/form-data">
                                 <span>{{'ID статьи: ' + selectArticle.id}}</span>
+
                                 <p></p>
                                 <input class="form-control" type="text" placeholder="Имя автора"  ng-model="selectArticle.author">
                                 <small id="authorHelp" class="form-text text-muted">Имя автора</small>
@@ -78,10 +79,48 @@
                                 <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="selectArticle.progLanguage">
                                 <small id="languageHelp" class="form-text text-muted">Язык программирования</small>
                                 <p></p>
-                            </form>
+                                <input type="file" id="fileEdit" >
+                                <button class="btn btn-primary" ng-click="openArticleForEdit(selectArticle.id)">Сохранить изменения</button>
+                                <div ng-show="isAnyImages()" style="margin-top: 20px;">
+                                    <span>Связанные изображения:</span>
+                                    <table class="table">
+                                        <thead>
+                                        <tr align="center">
+                                            <th class="th" width="100">ID</th>
+                                            <th class="th" width="100">Название</th>
+                                            <th class="th" width="100">Тип</th>
+                                            <th class="th" width="300"></th>
+                                        </tr>
 
-                            <input type="file" id="fileEdit" >
-                            <button class="btn btn-primary" ng-click="openArticleForEdit(selectArticle)">Сохранить изменения</button>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="i in selectArticle.images">
+
+                                            <td class="td">{{i.id}}</td>
+                                            <td class="td">{{i.fileName}}</td>
+                                            <td class="td">{{i.fileType}}</td>
+                                            <td class="td">
+                                                <!--                                <button class="btn btn-primary" ng-click="openArticleForEdit(p.id)">Редактировать</button>-->
+                                                <button class="btn btn-primary" type="button"
+                                                        ng-click="deleteImage(i.id)">Удалить</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                    <div class="article_materials">
+                                        <form>
+                                            <input id="addImage" multiple="multiple" name="addImage" type="file"
+                                               accept=".jfif,.jpg,.jpeg,.png,.gif" class="custom-file-input"  value="">
+                                            <button type="submit" ng-click="addImage(selectArticle.id)">Добавить изображение</button>
+                                        </form>
+
+                                    </div>
+
+                                <div id="addImageMediaPreview"></div>
+
+                            </form>
                         </div>
                     </div>
                     <table class="table">
