@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
-
 public class UserDTO {
     private Long id;
     @NotNull(message = "Введите имя пользователя")

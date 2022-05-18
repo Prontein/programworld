@@ -1,6 +1,6 @@
 .programs_container {
     width:1380px;
-    padding: 0 30px;
+    padding: 20px 30px;
     background:white;
     border:2px solid;
     border-radius:20px;
@@ -19,4 +19,106 @@
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+/*
+.function_line_container {
+   padding: 20px 30px;
+}
+*/
+.function_line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.function_line_container {
+    margin-bottom: 10px;
+}
+
+.function_line_container:after {
+   content:"";
+   display:block;
+   width: 100%;
+   margin: 1px auto 0;
+   border: 0.5px solid rgba(69, 69, 69, 0.12);
+   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.27);
+}
+
+.comment_section {
+    margin: auto;
+    max-width:1000px;
+    padding-top: 30px;
+ }
+/*
+.comment_container{
+    padding: 20px 30px;
+}*/
+#comment-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.rating_container{
+    margin-top: 20px;
+    width:1380px;
+    display: flex;
+    justify-content: space-between;
+}
+.rating_container_inner_rate{
+    display: flex;
+}
+
+.rating_container_inner_view {
+    display: flex;
+    align-items: center;
+}
+/* внешний контейнер - фон с серыми звездочками */
+.rate_background {
+    background-size: 26px;
+    position: relative;
+ /*   width: 80px;*/
+    width: 130px;
+    height: 26px;
+    background:url('img/grayStar.png') repeat-x;
+}
+
+
+/* внутренний контейнер - полоса рейтинга с золотыми звездочками */
+.rate_bar {
+    background-size: 26px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    background:url('img/goldStar.png') repeat-x;
+}
+
+.star-rating{
+ font-size: 0;
+}
+.star-rating__wrap{
+ display: inline-block;
+ font-size: 1rem;
+}
+.star-rating__wrap:after{
+ content: "";
+ display: table;
+ clear: both;
+}
+.star-rating__ico{
+ float: right;
+ padding-left: 2px;
+ cursor: pointer;
+ color: #FFB300;
+}
+.star-rating__ico:last-child{
+ padding-left: 0;
+}
+.star-rating__input{
+ display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before
+{
+ content: "\f005";
 }

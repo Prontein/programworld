@@ -12,6 +12,9 @@ import java.util.List;
 @NamedEntityGraph(name = "Article.images",
         attributeNodes = @NamedAttributeNode("images")
 )
+@NamedQueries({
+        @NamedQuery(name = "Article.findByIdWithRate", query = "SELECT u FROM Article u JOIN FETCH u.ratings WHERE u.id = :id")
+})
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +41,10 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Image> images;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 }

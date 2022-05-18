@@ -21,4 +21,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long>, JpaSpec
 
     @Query(value = "SELECT * FROM articles where prog_language = ?1", nativeQuery = true)
     List<Article> findAllByProgLanguage(String program_language);
+
+    Optional<Article> findByIdWithRate(@Param("id") Long article_id);
 }

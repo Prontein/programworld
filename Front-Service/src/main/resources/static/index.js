@@ -20,7 +20,7 @@
                 templateUrl: 'programs_list/programs_list.html',
                 controller: 'programs_listController'
             })
-             .when('/types_prog_languages/programs_list/:programId', {
+             .when('/types_prog_languages/programs_list/:program_language/:programId', {
                 templateUrl: 'program-view/program-view.html',
                 controller: 'program-viewController'
             })
@@ -40,7 +40,7 @@
     }
 })();
 
-angular.module('program').controller('indexController', function ($rootScope, $scope, $http, $localStorage,$location) {
+angular.module('program').controller('indexController', function ($rootScope, $scope, $http, $localStorage,$location,$route) {
     const authPath = 'http://localhost:5555/auth/';
     $scope.passwordType = "password";
     $scope.passwordTypeReg = "password";
@@ -56,13 +56,21 @@ angular.module('program').controller('indexController', function ($rootScope, $s
          }
             $http.post(authPath + 'api/v1/auth', $scope.user)
                 .then(function successCallback(response) {
+                    let jwt = response.data.token;
+                    let base64Url = jwt.split('.')[1];
+                    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
+                    let roles = JSON.parse(jsonPayload).roles;
+
                     if (response.data.token) {
                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                        $localStorage.siteMemoryUser = {username: $scope.user.username, token: response.data.token};
-
+                        $localStorage.siteMemoryUser = {username: $scope.user.username, token: response.data.token, roles: roles};
+                        $route.reload();
                         $scope.user.username = null;
                         $scope.user.password = null;
-                         $('#exampleModal').modal('hide');
+                        $('#exampleModal').modal('hide');
                     }
                 }, function errorCallback(response) {
                 console.log(response.data.messages);
@@ -72,13 +80,13 @@ angular.module('program').controller('indexController', function ($rootScope, $s
 
         $scope.tryToLogout = function () {
             $scope.clearUser();
-            if ($scope.user.username) {
+            if ($scope.user != null && $scope.user.username) {
                 $scope.user.username = null;
             }
-            if ($scope.user.password) {
+            if ($scope.user != null && $scope.user.password) {
                 $scope.user.password = null;
             }
-            $location.path('/');
+ /*           $location.path('/');*/
         };
 
         $scope.clearUser = function () {
@@ -139,12 +147,4 @@ angular.module('program').controller('indexController', function ($rootScope, $s
             angular.element(document.querySelector("#passRegHideLogo")).addClass('bi bi-eye-slash').removeClass('bi bi-eye');
         }
     };
-/*
-    $(document).ready(function() {
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-    });
-hljs.initHighlightingOnLoad();
-*/
 });

@@ -11,14 +11,12 @@ import ru.geekbrains.programworld.core.exceptions.ArticleAlreadyExistException;
 import ru.geekbrains.programworld.core.model.Article;
 import ru.geekbrains.programworld.core.repositories.ArticleRepository;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -85,5 +83,9 @@ public class ArticleService {
     @Transactional
     public List<Article> findAllArticlesForClient(String program_language) {
         return articleRepository.findAllByProgLanguage(program_language);
+    }
+
+    public Optional<Article> findByIdWithRate(Long article_id) {
+        return articleRepository.findByIdWithRate(article_id);
     }
 }

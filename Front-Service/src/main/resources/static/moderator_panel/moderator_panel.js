@@ -1,29 +1,7 @@
-
 angular.module('program').controller('moderator_panelController', function ($scope, $http,$location,$routeParams,$sce) {
     const contextPath = 'http://localhost:5555/core/';
    $scope.content1='';
 
-
-
-  /*  $scope.readArticle = function () {
-        $http.get(contextPath + 'api/v1/articles/' + $routeParams.articleId)
-            .then(function successCallback (response) {
-                $scope.article = response.data;
-                $scope.content = $sce.trustAsHtml($scope.article.content);
-                let reader = new FileReader();
-                reader.readAsText();
-                reader.onload = function() {
-                }
-
-
-                console.log(response);
-            }, function failureCallback (response) {
-                alert(response.data.messages);
-                $location.path('/');
-            });
-    }*/
-
- /*   $scope.readArticle();*/
     $scope.previewArticle = function () {
     //document.querySelector('#bt2').addEventListener('click', function(){
         let file = document.getElementById('file').files[0];
@@ -41,7 +19,6 @@ angular.module('program').controller('moderator_panelController', function ($sco
     }
 
     $scope.open = function () {
-    //document.querySelector('#bt2').addEventListener('click', function(){
         $http.get(contextPath + 'api/v1/articles/' + $routeParams.programId)
             .then(function successCallback (response) {
                 $scope.content1 = $sce.trustAsHtml(response.data);

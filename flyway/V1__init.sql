@@ -20,12 +20,30 @@ create table articles
     content         bigint not null
 );
 
+create table comments
+(
+    id                  bigserial primary key,
+    username            varchar(30) not null,
+    content             varchar(2000),
+    article_id          bigint REFERENCES articles (id),
+    created_at          timestamp default current_timestamp,
+    updated_at          timestamp default current_timestamp
+);
+
 create table images
 (
     id              bigserial primary key,
     file_name       varchar(255),
     file_type       varchar(50),
     file_folder     varchar(255),
+    article_id      bigint REFERENCES articles (id)
+);
+
+create table ratings
+(
+    id              bigserial primary key,
+    user_score      int,
+    username       varchar(30),
     article_id      bigint REFERENCES articles (id)
 );
 --insert into articles (content)

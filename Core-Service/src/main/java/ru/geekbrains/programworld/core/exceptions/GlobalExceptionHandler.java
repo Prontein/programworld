@@ -21,8 +21,15 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<?> catchUserAlreadyExistException(ArticleAlreadyExistException e) {
+    public ResponseEntity<?> catchArticleAlreadyExistException(ArticleAlreadyExistException e) {
         return new ResponseEntity<>(new ArticleAlreadyExistException(e.getMessages()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<?> catchRatingAlreadyExistException(RatingAlreadyExistException e) {
+        return new ResponseEntity<>(new RatingAlreadyExistException(e.getMessages()), HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }

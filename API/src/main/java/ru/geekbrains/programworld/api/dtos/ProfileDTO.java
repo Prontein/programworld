@@ -1,16 +1,16 @@
 package ru.geekbrains.programworld.api.dtos;
 
 
-public class ProfileDto {
+public class ProfileDTO {
     private String username;
     private String firstName;
     private String lastName;
     private String email;
 
-    public ProfileDto() {
+    public ProfileDTO() {
     }
 
-    public ProfileDto(String username, String firstName, String lastName, String email) {
+    public ProfileDTO(String username, String firstName, String lastName, String email) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

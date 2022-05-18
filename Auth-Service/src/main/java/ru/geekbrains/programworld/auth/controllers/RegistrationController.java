@@ -24,7 +24,6 @@ public class RegistrationController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/api/v1/registration")
-//    @PostMapping("/api/v1/auth/registration")
     public UserDTO newUser(@RequestBody @Validated UserDTO userDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new DataValidationException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));

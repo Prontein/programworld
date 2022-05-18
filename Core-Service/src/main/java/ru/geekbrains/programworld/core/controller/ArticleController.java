@@ -1,26 +1,20 @@
 package ru.geekbrains.programworld.core.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.geekbrains.programworld.api.dtos.ArticleDTO;
 import ru.geekbrains.programworld.api.dtos.ArticleUploadResponse;
 import ru.geekbrains.programworld.api.exceptions.ResourceNotFoundException;
-import ru.geekbrains.programworld.core.exceptions.DataValidationException;
 import ru.geekbrains.programworld.core.model.Article;
 import ru.geekbrains.programworld.core.service.ArticleService;
 import ru.geekbrains.programworld.core.utils.Converter;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,12 +26,13 @@ public class ArticleController {
     private final Converter converter;
 
     @GetMapping
-    public List<ArticleDTO> getAllArticles() {
+    public List<ArticleDTO> getAllArticles(@RequestParam(name="program_language", required = false) String program_language) {
+        System.out.println(program_language);
+        if (program_language != null) return articleService.findAllArticlesForClient(program_language).stream().map(converter::articleToDtoForClient).collect(Collectors.toList());
         return articleService.findAllArticles().stream().map(o -> converter.articleToDto(o)).collect(Collectors.toList());
     }
 
     @PostMapping(value = "/upload/db", consumes = { "multipart/form-data" })
-//    public ArticleUploadResponse uploadArticleToDb(@RequestParam("file")MultipartFile multipartFile) {
     public ArticleUploadResponse uploadArticleToDb(@RequestPart("file")MultipartFile multipartFile, @RequestPart("new_article") ArticleDTO articleDTO) {
         Article article = articleService.uploadToDb(multipartFile,articleDTO);
         ArticleUploadResponse articleUploadResponse = new ArticleUploadResponse();
@@ -85,19 +80,11 @@ public class ArticleController {
     }
 
     @GetMapping("/{program_language}")
-    public List<ArticleDTO> findById(@PathVariable String program_language) {
-        return articleService.findAllArticlesForClient(program_language).stream().map(converter::articleToDtoForClient).collect(Collectors.toList());
+    public ResponseEntity findById(@RequestParam(name="programId", required = false) Long programId) {
+        Article article = articleService.findById(programId).orElseThrow(() -> new ResourceNotFoundException("Article id = " + programId + " not found"));
+        return  ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(article.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + article.getFileName())
+                .body(article.getContent());
     }
-
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity findById(@PathVariable Long id) {
-//        Article article = articleService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article id = " + id + " not found"));
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(article.getFileType()))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + article.getFileName())
-//                .body(article.getContent());
-////               .body(new ByteArrayResource(article.getContent()));
-//    }
 }
