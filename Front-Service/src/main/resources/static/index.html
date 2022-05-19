@@ -64,7 +64,10 @@
                         <img class="userIconImg" src="img/iconUser.png">
                         <div class='hidden_user_content'>
                             <a class="nav-item" style="padding: 4px;">
-                                <button class="logoutBtn" ng-click="tryToLogout()"><span>Выйти из профиля</span></button>
+                                <button class="profileMenuBtn" ng-click="openProfile()"><span>Профиль</span></button>
+                            </a>
+                            <a class="nav-item" style="padding: 4px;">
+                                <button class="profileMenuBtn" ng-click="tryToLogout()"><span>Выйти из профиля</span></button>
                             </a>
                         </div>
                     </div>
@@ -257,6 +260,7 @@
     <script src="programs_list/programs_list.js"></script>
     <script src="program-view/program-view.js"></script>
     <script src="moderator_panel/moderator_panel.js"></script>
+    <script src="profile/profile.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="highlight/highlight.min.js"></script>
 

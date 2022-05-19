@@ -28,7 +28,10 @@
                 templateUrl: 'moderator_panel/moderator_panel.html',
                 controller: 'moderator_panelController'
             })
-
+            .when('/profile', {
+                templateUrl: 'profile/profile.html',
+                controller: 'profileController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -86,6 +89,7 @@ angular.module('program').controller('indexController', function ($rootScope, $s
             if ($scope.user != null && $scope.user.password) {
                 $scope.user.password = null;
             }
+            $route.reload();
  /*           $location.path('/');*/
         };
 
@@ -124,6 +128,10 @@ angular.module('program').controller('indexController', function ($rootScope, $s
 
     $scope.openProgram = function() {
         $location.path('/types_prog_languages');
+    }
+
+    $scope.openProfile = function() {
+        $location.path('/profile');
     }
 
 

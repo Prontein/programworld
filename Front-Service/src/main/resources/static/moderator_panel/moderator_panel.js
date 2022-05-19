@@ -143,7 +143,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
         fd.append('fileEdit', file);
         fd.append('selectArticle',new Blob([JSON.stringify($scope.selectArticle)], {type: "application/json"}));
 
-        $http.put(contextPath + 'api/v1/articles/edit/' + articleId, fd, {
+        $http.put(contextPath + 'api/v1/articles/' + articleId, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
             })

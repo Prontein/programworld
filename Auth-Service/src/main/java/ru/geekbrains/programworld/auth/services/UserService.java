@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.geekbrains.programworld.api.dtos.EditProfileDTO;
 import ru.geekbrains.programworld.api.dtos.UserDTO;
 import ru.geekbrains.programworld.auth.exceptions.UserAlreadyExistException;
 import ru.geekbrains.programworld.auth.model.Role;
@@ -60,5 +61,16 @@ public class UserService implements UserDetailsService {
 
     private boolean userExists(String username) {
         return userRepository.findByUsername(username).isPresent();
+    }
+
+    @Transactional
+    public User editUserAccount(EditProfileDTO editProfileDTO, String username) {
+        User user = findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", username)));
+
+        if (editProfileDTO.getFirstName() != null) user.setFirstName(editProfileDTO.getFirstName());
+        if (editProfileDTO.getLastName() != null) user.setLastName(editProfileDTO.getLastName());
+        if (editProfileDTO.getEmail() != null) user.setEmail(editProfileDTO.getEmail());
+
+        return userRepository.save(user);
     }
 }

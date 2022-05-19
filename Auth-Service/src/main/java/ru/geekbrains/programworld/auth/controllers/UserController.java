@@ -18,7 +18,7 @@ import ru.geekbrains.programworld.auth.services.UserService;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/me")
+    @GetMapping
     public ProfileDTO aboutCurrentUser(@RequestHeader String username) {
         User user = userService.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти пользователя. Имя пользователя: " + username));
         return new ProfileDTO(user.getUsername(), user.getFirstName(), user.getLastName(), user.getEmail());

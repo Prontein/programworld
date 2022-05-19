@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="profile/profile.css">
+</head>
+
+<body>
+    <div class="profile_container">
+        <form class="row g-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <fieldset disabled>
+                    <label for="inputUsername" class="form-label">Имя пользователя</label>
+                    <input type="text" class="form-control" id="inputUsername" value="{{userProfile.username}}">
+                    </fieldset>
+                </div>
+                <div class="col-md-4">
+                    <fieldset disabled>
+                    <label for="inputEmail" class="form-label">Адрес электронной почты</label>
+                    <input type="email" class="form-control" id="inputEmail" value="{{userProfile.email}}">
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <fieldset disabled>
+                    <label for="inputAddress" class="form-label">Имя</label>
+                    <input type="text" class="form-control" id="inputAddress" value="{{userProfile.firstName}}">
+                    </fieldset>
+                </div>
+                <div class="col-md-4">
+                    <fieldset disabled>
+                    <label for="inputAddress2" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" id="inputAddress2" value="{{userProfile.lastName}}">
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button class="btn btn-primary" id="btn1" ng-click="showBlock = ! showBlock">
+                    <span class="btnText">Редактировать</span>
+                    <span class="btnText" style="display:none">Отменить редактирование</span>
+                </button>
+            </div>
+        </form>
+        <p></p>
+        <div ng-show="showBlock">
+            <form novalidate ng-submit="updateProfile()">
+                <div class="col-4">
+                    <div class="input-group">
+                        <div class="input-group-text">Имя</div>
+                        <input class="form-control" type="text" pattern=".{2,}" placeholder="{{userProfile.firstName}}"  ng-model="user_update.firstName">
+                    </div>
+                </div>
+                <p></p>
+                <div class="col-4">
+                    <div class="input-group">
+                        <div class="input-group-text">Фамилия</div>
+                        <input class="form-control" type="text" pattern=".{2,}" placeholder="{{userProfile.lastName}}"  ng-model="user_update.lastName">
+                    </div>
+                </div>
+                <p></p>
+                <div class="col-4">
+                    <div class="input-group">
+                        <div class="input-group-text">E-mail</div>
+                        <input class="form-control" type="email" placeholder="{{userProfile.email}}"  ng-model="user_update.email">
+                    </div>
+                </div>
+                <p></p>
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            </form>
+        </div>
+<!--        <p></p>-->
+<!--        <h3 align="middle">Профиль</h3>-->
+<!--        <p>{{'Имя пользователя: ' + userProfile.username}}</p>-->
+<!--        <p>{{'Имя: ' + userProfile.firstName}}</p>-->
+<!--        <p>{{'Фамилия: ' + userProfile.lastName}}</p>-->
+<!--        <p>{{'E-Mail: ' + userProfile.email}}</p>-->
+
+    </div>
+</body>
+</html>

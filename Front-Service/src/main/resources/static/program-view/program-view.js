@@ -111,7 +111,6 @@ angular.module('program').controller('program-viewController', function ($localS
         $http.get(contextPath + 'api/v1/ratings/' + $routeParams.programId)
             .then(function successCallback (response) {
                 $scope.rating_info = response.data;
-                console.log(response.data);
             }, function failureCallback (response) {
                 alert(response.data.messages);
             });

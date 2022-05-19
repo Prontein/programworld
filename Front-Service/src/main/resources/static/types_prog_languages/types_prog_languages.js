@@ -10,4 +10,5 @@ angular.module('program').controller('types_prog_languagesController', function 
         var program_language = 'Java';
         $location.path('/types_prog_languages/programs_list/' + program_language);
     }
+
 });

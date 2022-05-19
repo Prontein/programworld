@@ -215,7 +215,7 @@ color: red;
     display: block;
 }
 /* Вкладка выйти из профиля*/
-.logoutBtn {
+.profileMenuBtn {
    /* border-radius: 5px;
     width: 155px;
     font-size: 15px;
@@ -223,17 +223,17 @@ color: red;
     color: black;*/
 }
 
-.logoutBtn,
-.logoutBtn::before,
-.logoutBtn::after,
-.logoutBtn span,
-.logoutBtn span::before,
-.logoutBtn span::after
+.profileMenuBtn,
+.profileMenuBtn::before,
+.profileMenuBtn::after,
+.profileMenuBtn span,
+.profileMenuBtn span::before,
+.profileMenuBtn span::after
 {
   transition: all ease .5s;
 }
 
-.logoutBtn{
+.profileMenuBtn{
     background: black;
     color: white;
     width: 152px;
@@ -246,56 +246,56 @@ color: red;
 
 }
 
-.logoutBtn:hover
+.profileMenuBtn:hover
 {
   box-shadow: 0 0 5em .5em rgba(50,50,150,0.5);
 }
 
-.logoutBtn span
+.profileMenuBtn span
 {
   display: inline-block;
   width: 100%;
   padding: 0.6em 2em;
 }
 
-.logoutBtn:hover span
+.profileMenuBtn:hover span
 {
   background-color: #fff;
   color: #112;
 }
 
-.logoutBtn::before,
-.logoutBtn::after,
-.logoutBtn span::before,
-.logoutBtn span::after
+.profileMenuBtn::before,
+.profileMenuBtn::after,
+.profileMenuBtn span::before,
+.profileMenuBtn span::after
 {
   content: '';
   position: absolute;
   border: 1px;
 }
 
-.logoutBtn::before,
-.logoutBtn span::before
+.profileMenuBtn::before,
+.profileMenuBtn span::before
 {
   border-style: solid none;
 }
 
-.logoutBtn::before,
-.logoutBtn span::after{
+.profileMenuBtn::before,
+.profileMenuBtn span::after{
   left: 0;
   top: -0.4em;
   width: 100%;
   height: calc(100% + 0.8em);
 }
 
-.logoutBtn::after,
-.logoutBtn span::after
+.profileMenuBtn::after,
+.profileMenuBtn span::after
 {
   border-style: none solid;
 }
 
-.logoutBtn::after,
-.logoutBtn span::before
+.profileMenuBtn::after,
+.profileMenuBtn span::before
 {
   top: 0;
   left: -0.4em;
@@ -303,26 +303,23 @@ color: red;
   width: calc(100% + 0.8em);
 }
 
-.logoutBtn:hover::after,
-.logoutBtn:hover span::after
+.profileMenuBtn:hover::after,
+.profileMenuBtn:hover span::after
 {
   transform: scaleY(0);
 }
 
-.logoutBtn:hover::before,
-.logoutBtn:hover span::before
+.profileMenuBtn:hover::before,
+.profileMenuBtn:hover span::before
 {
   transform: scaleX(0);
 }
 
-.logoutBtn:hover span::after,
-.logoutBtn:hover span::before
+.profileMenuBtn:hover span::after,
+.profileMenuBtn:hover span::before
 {
   opacity: 0;
 }
-
-
-
 
 /* Модальное окно*/
 
