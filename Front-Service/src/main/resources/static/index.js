@@ -4,8 +4,7 @@
         .config(config)
         .run(run);
 
-    function config($routeProvider/*,$locationProvider*/) {
-/*        $locationProvider.html5Mode(true);*/
+    function config($routeProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'welcome/welcome.html',
@@ -15,7 +14,6 @@
                 templateUrl: 'types_prog_languages/types_prog_languages.html',
                 controller: 'types_prog_languagesController'
             })
-       /*      .when('/types_prog_languages/programs_list', {*/
              .when('/types_prog_languages/programs_list/:program_language', {
                 templateUrl: 'programs_list/programs_list.html',
                 controller: 'programs_listController'
@@ -31,6 +29,10 @@
             .when('/profile', {
                 templateUrl: 'profile/profile.html',
                 controller: 'profileController'
+            }).
+            when('/about_project', {
+                templateUrl: 'about_project/about_project.html',
+                controller: 'about_projectController'
             })
             .otherwise({
                 redirectTo: '/'
@@ -90,7 +92,6 @@ angular.module('program').controller('indexController', function ($rootScope, $s
                 $scope.user.password = null;
             }
             $route.reload();
- /*           $location.path('/');*/
         };
 
         $scope.clearUser = function () {
@@ -155,4 +156,12 @@ angular.module('program').controller('indexController', function ($rootScope, $s
             angular.element(document.querySelector("#passRegHideLogo")).addClass('bi bi-eye-slash').removeClass('bi bi-eye');
         }
     };
+
+    $scope.isAdminRole = function () {
+        if ($localStorage.siteMemoryUser != null && $localStorage.siteMemoryUser.roles.indexOf( 'ROLE_ADMIN' ) != -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 });

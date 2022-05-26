@@ -1,28 +1,26 @@
 @media only screen {
- html,
- body {
- background: #222;
- overflow: hidden;
- height: 100%;
+     html,
+     body {
+     background: #222;
+     height: 100%;
  }
 
  .logo {
- font-size: 40px;
- font-family: 'sonos-logoregular';
- text-align: center;
- background: -webkit-linear-gradient(left, #8dfbf3, #fbf4f4, #ccf8c5, #ebf1af, #8dfbf3);
- background: linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
- background-size: 3200px 200px;
+     font-size: 40px;
+     font-family: 'sonos-logoregular';
+     background: -webkit-linear-gradient(left, #8dfbf3, #fbf4f4, #ccf8c5, #ebf1af, #8dfbf3);
+     background: linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
+     background-size: 3200px 200px;
 
- color: transparent;
- -webkit-background-clip: text;
- -webkit-animation: animate-logo;
- -webkit-animation-delay: 0;
- -webkit-animation-duration: 7s;
- -webkit-animation-timing-function: linear;
- -webkit-animation-iteration-count: infinite;
- -webkit-animation-fill-mode: forwards;
- transition: font-size 500ms ease-in-out;
+     color: transparent;
+     -webkit-background-clip: text;
+     -webkit-animation: animate-logo;
+     -webkit-animation-delay: 0;
+     -webkit-animation-duration: 7s;
+     -webkit-animation-timing-function: linear;
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-fill-mode: forwards;
+     transition: font-size 500ms ease-in-out;
  }
 }
 @media only screen and (min-width: 40.063em) {
@@ -44,17 +42,63 @@
  }
 }
 @media only screen and (min-width: 120.063em) {
- .logo {
-
- font-size: 40px;
- }
+    .logo {
+        font-size: 40px;
+    }
 }
+
 @-webkit-keyframes animate-logo {
- 0% {
- background-position: 0 3200px;
- }
- 100% {
- background-position: 3200px 0;
- }
+    0% {
+    background-position: 0 3200px;
+    }
+    100% {
+    background-position: 3200px 0;
+    }
 }
 
+.table-name {
+    margin-top:30px;
+    text-align:center;
+    color: lavenderblush;
+    text-shadow: 0 0 5px white, 0 0 10px #00ffff, 0 0 15px #000000, 0 0 20px white;
+}
+.table{
+    border-radius: 20px;
+    box-shadow: 0 0 6px 4px #dffff8;
+    font-size: 21px;
+
+}
+
+.td {
+    border-right: 1px solid #d2f3fd;
+
+}
+
+td,th {
+    text-align: center;
+}
+
+tr {
+   box-shadow: 0 0 7px 1px #dffff8;
+   border-radius: 10px;
+}
+
+.scroll {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #505252, #ffffff);
+}

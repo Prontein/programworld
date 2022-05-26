@@ -25,7 +25,6 @@ public class Rating {
     @JoinColumn(name = "article_id")
     private Article article;
 
-
     public Rating(int userScore, String username) {
         this.userScore = userScore;
         this.username = username;

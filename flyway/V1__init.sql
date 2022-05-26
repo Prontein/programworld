@@ -17,7 +17,9 @@ create table articles
     prog_language   varchar(50),
     file_name       varchar(255),
     file_type       varchar(50),
-    content         bigint not null
+    content         bigint not null,
+    created_at      timestamp default current_timestamp,
+    updated_at      timestamp default current_timestamp
 );
 
 create table comments

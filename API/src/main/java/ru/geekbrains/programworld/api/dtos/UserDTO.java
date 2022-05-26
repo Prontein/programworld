@@ -18,11 +18,9 @@ public class UserDTO {
     private String email;
 
     @NotNull(message = "Введите имя")
-//    @Length(min = 2, max = 255, message = "Введите корректное имя")
+    @Length(min = 2, max = 255, message = "Введите корректное имя")
     private String firstName;
 
-//    @NotNull(message = "Введите фамилию")
-//    @Length(min = 2, max = 255, message = "Введите корректную фамилию")
     private String lastName;
 
     public UserDTO() {

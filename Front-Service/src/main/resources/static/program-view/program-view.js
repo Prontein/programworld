@@ -1,7 +1,6 @@
 angular.module('program').controller('program-viewController', function ($localStorage,$scope,$rootScope, $http,$location,$routeParams,$sce,$route) {
     const contextPath = 'http://localhost:5555/core/';
 
-
     if ($localStorage.siteMemoryUser) {
         $scope.username = $localStorage.siteMemoryUser.username;
     }
@@ -15,23 +14,21 @@ angular.module('program').controller('program-viewController', function ($localS
             params: {
                 programId: $routeParams.programId
                 }
-        })
-            /*.get(contextPath + 'api/v1/articles/' + $routeParams.program_language +'/' + $routeParams.programId)*/
+            })
             .then(function successCallback (response) {
-
                 $scope.content1 = $sce.trustAsHtml(response.data);
                 $scope.$watch('content1', function() {
                     hljs.initHighlighting();
-                });
+            });
+                $scope.author = $localStorage.author;
+                $scope.title = $localStorage.title;
         }, function failureCallback (response) {
                  alert(response.data.messages);
                  $location.path('/');
-             });
+            });
     }
 
     $scope.createComment = function () {
-       /* $scope.article_comment = {username: $scope.username, article_Id: $routeParams.programId};
-*/
         $http.post(contextPath + 'api/v1/comments', $scope.article_comment)
             .then(function successCallback (response) {
                 console.log($scope.article_comment);
@@ -51,7 +48,7 @@ angular.module('program').controller('program-viewController', function ($localS
             params: {
                 article_Id: $routeParams.programId
                 }
-        })
+            })
             .then(function successCallback (response) {
                 $scope.article_comments = response.data;
                 showComments($scope.article_comments);
@@ -87,11 +84,9 @@ angular.module('program').controller('program-viewController', function ($localS
         btns.forEach(function(btn) {
           // Вешаем событие клик
           btn.addEventListener('click', function(e) {
-  /*          console.log('Button clicked' + e.target.classList);*/
             deleteComment(e.target.value);
           })
         })
-
     }
 
      function deleteComment(comment_id) {
@@ -102,12 +97,11 @@ angular.module('program').controller('program-viewController', function ($localS
                 comment_Id: comment_id
             }
         }).then(function (response) {
-            console.log(response);
             $route.reload();
         });
     }
 
-  $scope.getRating = function () {
+    $scope.getRating = function () {
         $http.get(contextPath + 'api/v1/ratings/' + $routeParams.programId)
             .then(function successCallback (response) {
                 $scope.rating_info = response.data;
@@ -124,17 +118,21 @@ angular.module('program').controller('program-viewController', function ($localS
 
     let ratingDTO = {userScore: $scope.rate_value.select, username: $scope.username, article_Id: $routeParams.programId};
     $http.post(contextPath + 'api/v1/ratings', ratingDTO)
-            .then(function successCallback (response) {
-                $scope.rate_value.select = null;
-                alert("Спасибо за вашу оценку!");
-               /* $scope.open();*/
-                $route.reload();
-            }, function failureCallback (response) {
-                alert(response.data.messages);
-            });
+        .then(function successCallback (response) {
+            $scope.rate_value.select = null;
+            alert("Спасибо за вашу оценку!");
+           /* $scope.open();*/
+            $route.reload();
+        }, function failureCallback (response) {
+            alert(response.data.messages);
+        });
     }
 
     $scope.open();
     $scope.loadComments();
     $scope.getRating();
+
+    $scope.returnBtnClick = function () {
+        history.back();
+    }
 });

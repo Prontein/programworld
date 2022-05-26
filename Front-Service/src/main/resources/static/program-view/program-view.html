@@ -8,11 +8,38 @@
 </head>
 
 <body >
+    <div class="function_line_container">
+        <div class="function_line">
+            <button class="btn btn-outline-info" ng-click="returnBtnClick()"
+                    style="color: lavenderblush;text-shadow: 0 0 5px white, 0 0 10px #00ffff, 0 0 15px #000000, 0 0 20px white;">Назад</button>
+        </div>
+
+    </div>
     <div class="programs_container">
+        <div class="info-container" >
+            <div class="article-info" style="display: flex;flex-direction: column;">
+                <div>
+                    <label id="author-label">Автор</label>
+                    <span>{{author}}</span>
+                </div>
+                <p></p>
+                <div>
+                    <label id="title-label">Название</label>
+                    <span>{{title}}</span>
+                </div>
+
+            </div>
+            <div class="rating_container_inner_view" >
+                <label id="rating-label">Рейтинг</label>
+                <div class="rate_background" style="background-size: 26px;">
+                    <div class="rate_bar" style="width:{{rating_info.averageRating}}%;background-size: 26px;"></div>
+                </div>
+            </div>
+        </div>
+        <p></p>
         <p ng-bind-html="content1"></p>
     </div>
     <div class="rating_container">
-
         <div class="rating_container_inner_rate" ng-show="!rating_info.userAlreadySetScore && isUserLoggedIn()">
             <label style="margin-right: 20px;">Ваша оценка:</label>
             <form style="display: flex;align-items: center;" ng-submit="setScore()">
@@ -37,14 +64,7 @@
                 </button>
             </form>
         </div>
-        <div class="rating_container_inner_view" >
-            <label>Рейтинг:</label>
-            <div class="rate_background" style="background-size: 26px;">
-                <div class="rate_bar" style="width:{{rating_info.averageRating}}%;background-size: 26px;"></div>
-            </div>
-        </div>
     </div>
-
     <div class="comment_section">
         <div class="function_line_container">
             <div class="function_line">
@@ -64,7 +84,5 @@
             <div id="comment-field"></div>
         </div>
     </div>
-
 </body>
-
 </html>

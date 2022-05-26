@@ -1,13 +1,7 @@
 package ru.geekbrains.programworld.api.dtos;
 
-
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 public class ArticleDTO {
     private Long id;
@@ -17,16 +11,33 @@ public class ArticleDTO {
     private String title;
     private String progLanguage;
     private List<ImageDTO> images;
+    private int numberOfComments;
+    private int numberOfRatings;
+    private double averageRating;
+    private LocalDateTime createdAt;
 
     public ArticleDTO() {
     }
 
-    public ArticleDTO(Long id, String author, String title, String progLanguage) {
+    public ArticleDTO(Long id, String progLanguage, String author, String title, LocalDateTime createdAt) {
+        this.id = id;
+        this.progLanguage = progLanguage;
+        this.author = author;
+        this.title = title;
+        this.createdAt = createdAt;
+    }
+
+    public ArticleDTO(Long id, String author, String title, String progLanguage, int numberOfComments, int numberOfRatings, double averageRating, LocalDateTime createdAt) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.progLanguage = progLanguage;
+        this.numberOfComments = numberOfComments;
+        this.numberOfRatings = numberOfRatings;
+        this.averageRating = averageRating;
+        this.createdAt = createdAt;
     }
+
     public ArticleDTO(Long id, String author, String title, String progLanguage, String fileName, String fileType, List<ImageDTO> images) {
         this.id = id;
         this.author = author;
@@ -36,6 +47,7 @@ public class ArticleDTO {
         this.fileType = fileType;
         this.images = images;
     }
+
     public List<ImageDTO> getImages() {
         return images;
     }
@@ -90,5 +102,37 @@ public class ArticleDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public void setNumberOfComments(int numberOfComments) {
+        this.numberOfComments = numberOfComments;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public int getNumberOfRatings() {
+        return numberOfRatings;
+    }
+
+    public void setNumberOfRatings(int numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

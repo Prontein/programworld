@@ -5,7 +5,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.programworld.api.dtos.ArticleDTO;
 import ru.geekbrains.programworld.api.dtos.CommentDTO;
 import ru.geekbrains.programworld.core.exceptions.DataValidationException;
 import ru.geekbrains.programworld.core.service.CommentService;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 public class CommentController {
     private final CommentService commentService;
     private final Converter converter;
-
 
     @PostMapping
     public void addComment(@RequestBody @Validated CommentDTO commentDTO, BindingResult bindingResult) {

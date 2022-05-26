@@ -15,8 +15,8 @@
 
     -webkit-box-reflect: below 10px linear-gradient(transparent,transparent,#0002);
      transition: transform .5s linear;
- /*   transition-duration: 0.5s;
-    transition-timing-function: linear;*/
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
     transform:perspective(400px) rotateY(-10deg);
 }
 .content_type_btn:hover, .content_type_btn:focus {
@@ -35,7 +35,7 @@
     overflow:hidden;
     backface-visibility:hidden;
     position:absolute;
-    transition: transform .6s linear;
+/*    transition: transform .6s linear;*/
 /*    transition-duration: 0.6s;*/
  /*   transition-timing-function: linear;*/
 }
@@ -78,10 +78,5 @@
     transform:perspective(600px) rotateY(0deg);
 }
 
-.preload * {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-}
+
 

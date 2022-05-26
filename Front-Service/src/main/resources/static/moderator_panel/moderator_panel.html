@@ -15,75 +15,140 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Редактировать статью</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Контакт</button>
-            </li>
+<!--            <li class="nav-item" role="presentation">-->
+<!--                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Пользователи</button>-->
+<!--            </li>-->
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <span>Добавление новой статьи:</span>
-                <div class="new_article_content" >
-                    <form  enctype="multipart/form-data">
-
-
-                    <input class="form-control" type="text" placeholder="Имя автора"  ng-model="new_article.author">
-                    <p></p>
-                    <input class="form-control" type="text" placeholder="Название статьи"  ng-model="new_article.title">
-                    <p></p>
-                    <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="new_article.progLanguage">
-                    <p></p>
-                    <div class="functional">
-                        <input type="file" id="file" >
-                        <button ng-click="previewArticle()">Просмотр</button>
-                        <button type="submit" ng-click="saveArticle()">Сохранить статью на сервере</button>
+                <div class="add_article_container">
+                    <div style="text-align: center;">
+                        <span >Добавление новой статьи</span>
                     </div>
-                    <p></p>
-                    </form>
-                    <p ng-bind-html="content1"></p>
-                    <!--        <p>{{content1}}</p>-->
+
+                    <div class="new_article_content" >
+                        <form  enctype="multipart/form-data" class="article-form">
+                            <div style="width: 500px;">
+                                <input class="form-control" type="text" placeholder="Имя автора"  ng-model="new_article.author" required>
+                                <p></p>
+                                <input class="form-control" type="text" placeholder="Название статьи"  ng-model="new_article.title" required>
+                                <p></p>
+                                <select class="form-control" id="languageSelectPref" ng-model="new_article.progLanguage" required>
+                                    <option value="">Выберите язык программирования</option>
+                                    <option>Java</option>
+                                    <option>Python</option>
+                                    <option>C++</option>
+                                    <option>Go</option>
+                                    <option>PHP</option>
+                                </select>
+                                <p></p>
+                                <div style="position:relative;">
+                                    <a class='btn btn-primary' href='javascript:;'>
+                                        Выберите файл
+                                        <input type="file" id="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);
+                                        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
+                                               name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());' required>
+                                    </a>
+                                    <span class='label label-info' id="upload-file-info"></span>
+                                </div>
+                            </div>
+                            <div class="functional" style="width: 200px;">
+                                <button class="btn btn-primary" ng-click="previewArticle()">Просмотр</button>
+                                <button class="btn btn-primary" type="submit" ng-click="saveArticle()">Сохранить статью</button>
+                            </div>
+                        </form>
+                        <p ng-bind-html="content1"></p>
+                    </div>
                 </div>
-                <span>Загрузка изображений:</span>
-                <div>
-<!--                    <input type="file" id="fileImg" >-->
-<!--                    <button ng-click="previewImg()">Просмотр</button>-->
-                    <form>
-<!--                    <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="new_article.progLanguage">-->
-                    <input class="form-control" type="text" placeholder="ID статьи"  ng-model="new_article.id">
-                    <div class="article_materials">
-                        <input id="ImageMedias" multiple="multiple" name="ImageMedias" type="file"
-                           accept=".jfif,.jpg,.jpeg,.png,.gif" class="custom-file-input"  value="">
-                        <button type="submit" ng-click="saveImage()">Сохранить изображение</button>
+                <div class="add_images_container">
+                    <div style="text-align: center;">
+                        <span>Загрузка изображений</span>
                     </div>
-                    </form>
-                    <div id="divImageMediaPreview"></div>
-<!--                    <div> <button ng-click="saveImage()">Сохранить изображение</button></div>-->
+                    <div>
+                        <form class="images-form" >
+                            <div style="width: 500px;">
+                                <input class="form-control" type="text" placeholder="ID статьи"  ng-model="new_article.id" required>
+                                <p></p>
+                                <div class="article_materials">
+                                        <div style="position:relative;">
+                                            <a class='btn btn-primary' href='javascript:;'>
+                                                Выберите изображение
+<!--                                    Загрузка нескольких изображений-->
+                                    <input id="ImageMedias" multiple="multiple" name="ImageMedias" type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);
+                                                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
+                                           accept=".jfif,.jpg,.jpeg,.png,.gif" class="custom-file-input" onchange='$("#upload-image-info").html($(this).val());' required>
+                                            </a>
+                                            <span class='label label-info' id="upload-image-info"></span>
+                                        </div>
+                                </div>
+                            </div>
+                            <div style="width: 200px;display: flex;align-items: center;">
+                                <button class="btn btn-primary" type="submit" ng-click="saveImage()">Сохранить изображение</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div id="divImageMediaPreview" style="text-align: center;"></div>
                 </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="edit_article_content">
-<!--                    <span>Редактирование статьи:</span>-->
-                    <button ng-click="getArticles()">Просмотр статей</button>
-
+                    <button class="btn btn-primary" ng-click="getArticles()">Просмотр статей</button>
+                    <p></p>
                     <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            <form  enctype="multipart/form-data">
-                                <span>{{'ID статьи: ' + selectArticle.id}}</span>
+                        <div class="card card-body" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+                            <div>
+                            <form enctype="multipart/form-data">
+                                <div style="width: 500px;">
+                                    <div>
+                                        <div class="input-group" style="width: 200px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupPrepend3">ID статьи</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="validationServerUsername" style="background-color: white;width: 20px;"
+                                                   aria-describedby="inputGroupPrepend3" value="{{selectArticle.id}}" disabled readonly>
+                                        </div>
 
-                                <p></p>
-                                <input class="form-control" type="text" placeholder="Имя автора"  ng-model="selectArticle.author">
-                                <small id="authorHelp" class="form-text text-muted">Имя автора</small>
-                                <p></p>
-                                <input class="form-control" type="text" placeholder="Название статьи"  ng-model="selectArticle.title">
-                                <small id="titleHelp" class="form-text text-muted">Название статьи</small>
-                                <p></p>
-                                <input class="form-control" type="text" placeholder="Язык программирования"  ng-model="selectArticle.progLanguage">
-                                <small id="languageHelp" class="form-text text-muted">Язык программирования</small>
-                                <p></p>
-                                <input type="file" id="fileEdit" >
-                                <button class="btn btn-primary" ng-click="openArticleForEdit(selectArticle.id)">Сохранить изменения</button>
+                                        <p></p>
+                                        <input class="form-control" type="text" placeholder="Имя автора"  ng-model="selectArticle.author">
+                                        <small id="authorHelp" class="form-text text-muted">Имя автора</small>
+                                        <p></p>
+                                        <input class="form-control" type="text" placeholder="Название статьи"  ng-model="selectArticle.title">
+                                        <small id="titleHelp" class="form-text text-muted">Название статьи</small>
+                                        <p></p>
+                                        <select id="inputState" class="form-control" ng-model="selectArticle.progLanguage">
+                                            <option selected>Java</option>
+                                            <option>Python</option>
+                                            <option>C++</option>
+                                            <option>Go</option>
+                                            <option>PHP</option>
+                                        </select>
+                                        <small id="languageHelp" class="form-text text-muted">Язык программирования</small>
+                                        <p></p>
+                                        <div style="position:relative;">
+                                            <a class='btn btn-primary' href='javascript:;'>
+                                                Выберите файл
+                                                <input type="file" id="fileEdit" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);
+                                            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
+                                                       name="file_source" size="40"  onchange='$("#fileEdit-info").html($(this).val());' required>
+                                            </a>
+                                            <span class='label label-info' id="fileEdit-info"></span>
+                                        </div>
+                                    </div>
+                                    <p></p>
+                                    <div>
+                                        <button class="btn btn-primary" ng-click="openArticleForEdit(selectArticle.id)">Сохранить изменения</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                            <div style="width: 500px;">
                                 <div ng-show="isAnyImages()" style="margin-top: 20px;">
-                                    <span>Связанные изображения:</span>
-                                    <table class="table">
+                                    <div style="text-align: center;">
+                                        <span>Связанные изображения</span>
+                                    </div>
+                                    <p></p>
+                                    <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr align="center">
                                             <th class="th" width="100">ID</th>
@@ -91,7 +156,6 @@
                                             <th class="th" width="100">Тип</th>
                                             <th class="th" width="300"></th>
                                         </tr>
-
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="i in selectArticle.images">
@@ -100,7 +164,6 @@
                                             <td class="td">{{i.fileName}}</td>
                                             <td class="td">{{i.fileType}}</td>
                                             <td class="td">
-                                                <!--                                <button class="btn btn-primary" ng-click="openArticleForEdit(p.id)">Редактировать</button>-->
                                                 <button class="btn btn-primary" type="button"
                                                         ng-click="deleteImage(i.id)">Удалить</button>
                                             </td>
@@ -108,31 +171,49 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                    <div class="article_materials">
-                                        <form>
+                            <div class="edit-article_materials">
+                                <div style="text-align: center;">
+                                    <span>Добавить изображения</span>
+                                </div>
+                                <p></p>
+                                <div>
+                                    <form>
+                                        <div style="position:relative;">
+                                            <a class='btn btn-primary' href='javascript:;'>
+                                                Выберите изображение
                                             <input id="addImage" multiple="multiple" name="addImage" type="file"
-                                               accept=".jfif,.jpg,.jpeg,.png,.gif" class="custom-file-input"  value="">
-                                            <button type="submit" ng-click="addImage(selectArticle.id)">Добавить изображение</button>
-                                        </form>
-
-                                    </div>
-
-                                <div id="addImageMediaPreview"></div>
-
-                            </form>
+                                               accept=".jfif,.jpg,.jpeg,.png,.gif" class="custom-file-input" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);
+                                                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
+                                               value="" onchange='$("#addImage-info").html($(this).val());' required>
+                                            </a>
+                                            <span class='label label-info' id="addImage-info"></span>
+                                        </div>
+                                        <p></p>
+                                        <div id="addImageMediaPreview" style="text-align: center;"></div>
+                                        <p></p>
+                                        <button class="btn btn-primary" type="submit" ng-click="addImage(selectArticle.id)">Добавить изображение</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <table class="table">
+                        <p></p>
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                    aria-expanded="false" aria-controls="collapseExample">Закрыть редактирование</button>
+                        </div>
+                        <p></p>
+                    </div>
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr align="center">
                             <th class="th" width="100">ID</th>
-                            <th class="th" width="100">Автор</th>
-                            <th class="th" width="100">Название</th>
+                            <th class="th" width="200">Автор</th>
+                            <th class="th" width="200">Название</th>
                             <th class="th" width="100">Язык</th>
-                            <th class="th" width="300">Имя файла</th>
-                            <th class="th" width="300">Тип файла</th>
-                            <th class="th" width="300"></th>
+                            <th class="th" width="200">Имя файла</th>
+                            <th class="th" width="200">Тип файла</th>
+                            <th class="th" width="100"></th>
                         </tr>
 
                         </thead>
@@ -146,7 +227,6 @@
                             <td class="td">{{p.fileName}}</td>
                             <td class="td">{{p.fileType}}</td>
                             <td class="td">
-<!--                                <button class="btn btn-primary" ng-click="openArticleForEdit(p.id)">Редактировать</button>-->
                                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
                                         ng-click="viewArticle(p)" aria-expanded="false" aria-controls="collapseExample">Редактировать</button>
                             </td>

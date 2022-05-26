@@ -7,13 +7,39 @@
 </head>
 
 <body>
+    <div>
+        <h2 class="logo" style="text-align: center;">Добро пожаловать на образовательный сайт по программированию!</h2>
+        <p></p>
+        <h1 class="logo">Пожалуйста воспользуйтесь навигационным меню для выбора интересующего вас материала или свяжитесь с нами для размещения ваших материалов на сайте.
+            </h1>
+        <h1 class="logo" style="text-align: center;">Легкого и приятного обучения!</h1>
+    </div>
+    <div class="table-name">
+        <h1>Последние обновления материалов</h1>
+    </div>
+    <div  class="scroll" style="padding: 5px;">
 
-<div>
-    <h2 class="logo">Добро пожаловать на образовательный сайт по программированию!</h2>
-    <p></p>
-    <h1 class="logo">Пожалуйста воспользуйтесь навигационным меню для выбора интересующего вас материала или свяжитесь с нами для размещения ваших материалов на нашем сайте.
-        </h1>
-    <h1 class="logo">Легкого и приятного обучения!</h1>
+        <table class="table">
+            <thead style="border-style: hidden;">
+            <tr align="center" >
+                <th class="th" width="150" style="vertical-align: middle;padding: 3px;
+                    border-right: 1px solid #d2f3fd;">Автор</th>
+                <th class="th" width="300" style="vertical-align: middle;padding: 3px;
+                    border-right: 1px solid #d2f3fd;">Название</th>
+                <th class="th" width="130" style="padding: 3px;
+                     border-right: 1px solid #d2f3fd;word-break: break-word;">Язык программирования</th>
+                <th class="th" width="100">Дата обновления</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="a in articlesPage">
+                <td class="td">{{a.author}}</td>
+                <td class="td">{{a.title}}</td>
+                <td class="td">{{a.progLanguage}}</td>
+                <td>{{a.createdAt +'Z' | date : 'MMM d, y' }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 

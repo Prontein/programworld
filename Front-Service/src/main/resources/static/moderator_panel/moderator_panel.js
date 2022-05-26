@@ -1,22 +1,29 @@
 angular.module('program').controller('moderator_panelController', function ($scope, $http,$location,$routeParams,$sce) {
-    const contextPath = 'http://localhost:5555/core/';
+   const contextPath = 'http://localhost:5555/core/';
    $scope.content1='';
+   var preview = false;
 
     $scope.previewArticle = function () {
-    //document.querySelector('#bt2').addEventListener('click', function(){
-        let file = document.getElementById('file').files[0];
+        if (!preview) {
+            let file = document.getElementById('file').files[0];
 
-        let reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function(evt) {
-            $scope.$apply(function() {
-                let res = reader.result;
-                $scope.content1 = $sce.trustAsHtml(res);
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(evt) {
+                $scope.$apply(function() {
+                    let res = reader.result;
+                    $scope.content1 = $sce.trustAsHtml(res);
 
-            });
-        hljs.initHighlighting();
-        };
+                });
+            hljs.initHighlighting();
+            };
+            preview = true;
+        } else {
+            $scope.content1='';
+            preview = false;
+        }
     }
+
 
     $scope.open = function () {
         $http.get(contextPath + 'api/v1/articles/' + $routeParams.programId)
@@ -30,6 +37,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
 
      $scope.saveArticle = function () {
         let file = document.getElementById('file').files[0];
+        if (file == null) return;
         var fd = new FormData();
         fd.append('file', file);
         fd.append('new_article',new Blob([JSON.stringify($scope.new_article)], {type: "application/json"}));
@@ -47,6 +55,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
 
     $scope.saveImage = function () {
         let file = document.getElementById('ImageMedias').files[0];
+        if (file == null) return;
         var fd = new FormData();
         fd.append('ImageMedias', file);
         $http.post(contextPath + 'api/v1/images/' + $scope.new_article.id, fd, {
@@ -56,11 +65,12 @@ angular.module('program').controller('moderator_panelController', function ($sco
             .then(function successCallback (response) {
                 console.log(response);
             }, function errorCallback(response) {
-               console.log(response.data.messages);
-               alert(response.data.messages);
-               });
+                console.log(response.data.messages);
+                alert(response.data.messages);
+            });
     }
 
+/* Загрузка для нескольких изображений*/
         $("#ImageMedias").change(function () {
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#divImageMediaPreview");
@@ -86,7 +96,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
             url: contextPath + 'api/v1/articles',
             method: 'GET',
         }).then(function (response) {
-            console.log(response);
+
             $scope.articlesPage = response.data;
         });
         }
@@ -101,8 +111,9 @@ angular.module('program').controller('moderator_panelController', function ($sco
         } else {return true;}
     }
 
-   $scope.addImage = function (articleId) {
+    $scope.addImage = function (articleId) {
         let file = document.getElementById('addImage').files[0];
+        if (file == null) return;
         var fd = new FormData();
         fd.append('ImageMedias', file);
         $http.post(contextPath + 'api/v1/images/' + articleId, fd, {
@@ -114,7 +125,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
             }, function errorCallback(response) {
                console.log(response.data.messages);
                alert(response.data.messages);
-               });
+       });
     }
 
     $("#addImage").change(function () {
@@ -148,9 +159,7 @@ angular.module('program').controller('moderator_panelController', function ($sco
             headers: {'Content-Type': undefined}
             })
             .then(function successCallback (response) {
-            console.log(response.data);
             }, function errorCallback(response) {
-            console.log(response.data);
             alert(response.data);
         });
     }
@@ -163,4 +172,17 @@ angular.module('program').controller('moderator_panelController', function ($sco
             console.log(response);
         });
     }
+
+    $(function($){
+        var storage = localStorage.getItem('nav-tabs');
+        if (storage && storage !== "#") {
+            $('.nav-tabs button[data-bs-target="' + storage + '"]').tab('show');
+        }
+
+        $('ul.nav li').on('click', function() {
+            var id = $(this).find('button').attr('data-bs-target');
+            localStorage.setItem('nav-tabs', id);
+	});
+});
+
 });

@@ -17,14 +17,12 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
     @Value("${upload.path}")
     private String uploadPath;
     private final ArticleRepository articleRepository;
-
 
     public Optional<Article> findById(Long id) {
         return articleRepository.findById(id);
@@ -82,7 +80,10 @@ public class ArticleService {
 
     @Transactional
     public List<Article> findAllArticlesForClient(String program_language) {
-        return articleRepository.findAllByProgLanguage(program_language);
+        if (program_language == null) return articleRepository.findAllForUser();
+
+        List<Article> articlesWithComments = articleRepository.findAllByProgLanguageWithComments(program_language);
+        return articleRepository.findAllByProgLanguageWithCommentsAndRating(articlesWithComments);
     }
 
     public Optional<Article> findByIdWithRate(Long article_id) {

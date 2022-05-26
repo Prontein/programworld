@@ -32,6 +32,4 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
             .and()
             .cors().disable();
     }
-
-
 }

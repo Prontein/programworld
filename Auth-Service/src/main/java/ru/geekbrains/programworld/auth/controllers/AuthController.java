@@ -1,6 +1,5 @@
 package ru.geekbrains.programworld.auth.controllers;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import ru.geekbrains.programworld.api.dtos.AuthResponse;
 import ru.geekbrains.programworld.api.exceptions.SiteError;
 import ru.geekbrains.programworld.auth.services.UserService;
 import ru.geekbrains.programworld.auth.utils.JwtTokenUtil;
-
 
 @RestController
 @RequestMapping("/api/v1/auth")

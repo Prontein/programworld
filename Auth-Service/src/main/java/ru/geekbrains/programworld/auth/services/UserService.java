@@ -48,6 +48,7 @@ public class UserService implements UserDetailsService {
         if (userExists(userDTO.getUsername())) {
             throw new UserAlreadyExistException("Пользователь с таким именем уже существует: " + userDTO.getUsername());
         }
+
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));

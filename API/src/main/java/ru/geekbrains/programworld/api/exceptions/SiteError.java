@@ -1,10 +1,8 @@
 package ru.geekbrains.programworld.api.exceptions;
 
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 
 public class SiteError {
     private List<String> messages;

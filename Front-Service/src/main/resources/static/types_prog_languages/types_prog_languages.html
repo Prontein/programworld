@@ -5,62 +5,61 @@
     <link rel="stylesheet" href="types_prog_languages/types_prog_languages.css">
 </head>
 
-<body class="preload">
-
+<body>
     <div class="content_type_container" >
-    <!--        <button class="content_type_btn" id="java_btn" ng-click="openJavaProgram()"></button>-->
-            <button class="content_type_btn" id="java_btn" ng-click="openJavaProgram()">
-                <div class="front">
-                    <img src="types_prog_languages/img/javaBtn.jpg" alt="">
+        <button class="content_type_btn" id="java_btn" ng-click="openJavaProgram()">
+            <div class="front">
+                <img src="types_prog_languages/img/javaBtn.jpg" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content">
+                    <label>Количество доступных материалов</label>
+                    <p></p>
+                    <label>{{Java_articles}}</label>
                 </div>
-                <div class="back">
-                    <div class="back-content">
-                        <h2>Описание</h2>
-                    </div>
+            </div>
+        </button>
+        <button class="content_type_btn" id="c_btn" >
+            <div class="front">
+                <img src="types_prog_languages/img/cBtn.jpg" alt="">
+            </div>
+            <div class="back" style="padding-top: 75px;">
+                <div class="back-content">
+                    <span>В разработке</span>
                 </div>
-            </button>
-            <button class="content_type_btn" id="c_btn" ng-click="openProgram()">
-                <div class="front">
-                    <img src="types_prog_languages/img/cBtn.jpg" alt="">
+            </div>
+        </button>
+        <button class="content_type_btn" id="php_btn" >
+            <div class="front">
+                <img src="types_prog_languages/img/phpBtn.jpg" alt="">
+            </div>
+            <div class="back" style="padding-top: 75px;">
+                <div class="back-content">
+                    <span>В разработке</span>
                 </div>
-                <div class="back">
-                    <div class="back-content">
-                        <h2>Описание</h2>
-                    </div>
+            </div>
+        </button>
+        <button class="content_type_btn" id="python_btn" >
+            <div class="front">
+                <img src="types_prog_languages/img/pythonBtn.jpg" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content" style="padding-top: 75px;">
+                    <span>В разработке</span>
                 </div>
-            </button>
-            <button class="content_type_btn" id="php_btn" ng-click="openProgram()">
-                <div class="front">
-                    <img src="types_prog_languages/img/phpBtn.jpg" alt="">
+            </div>
+        </button>
+        <button class="content_type_btn" id="go_btn" >
+            <div class="front">
+                <img src="types_prog_languages/img/goBtn.jpg" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content" style="padding-top: 75px;">
+                    <span>В разработке</span>
                 </div>
-                <div class="back">
-                    <div class="back-content">
-                        <h2>Описание</h2>
-                    </div>
-                </div>
-            </button>
-            <button class="content_type_btn" id="python_btn" ng-click="openProgram()">
-                <div class="front">
-                    <img src="types_prog_languages/img/pythonBtn.jpg" alt="">
-                </div>
-                <div class="back">
-                    <div class="back-content">
-                        <h2>Описание</h2>
-                    </div>
-                </div>
-            </button>
-            <button class="content_type_btn" id="go_btn" ng-click="openProgram()">
-                <div class="front">
-                    <img src="types_prog_languages/img/goBtn.jpg" alt="">
-                </div>
-                <div class="back">
-                    <div class="back-content">
-                        <h2>Описание</h2>
-                    </div>
-                </div>
-            </button>
-</div>
-
+            </div>
+        </button>
+    </div>
 </body>
 
 </html>

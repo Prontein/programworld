@@ -1,9 +1,11 @@
 
-angular.module('program').controller('programs_listController', function ($scope, $http,$location,$routeParams) {
+angular.module('program').controller('programs_listController', function ($scope, $http,$location,$routeParams,$localStorage) {
     const contextPath = 'http://localhost:5555/core/';
 
 
-   $scope.openProgram = function(programId) {
+   $scope.openProgram = function(programId,author,title) {
+        $localStorage.author = author;
+        $localStorage.title = title;
         $location.path('/types_prog_languages/programs_list/' + $routeParams.program_language + '/' + programId);
     }
 
@@ -29,6 +31,10 @@ angular.module('program').controller('programs_listController', function ($scope
             });
         });
         }
+
+    $scope.returnBtnClick = function () {
+        history.back();
+    }
 
     $scope.getArticles();
 });

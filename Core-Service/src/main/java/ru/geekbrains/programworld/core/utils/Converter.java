@@ -10,7 +10,6 @@ import ru.geekbrains.programworld.core.model.Comment;
 import ru.geekbrains.programworld.core.model.Image;
 import ru.geekbrains.programworld.core.model.Rating;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +23,10 @@ public class Converter {
         return new ImageDTO(image.getId(), image.getFileName(), image.getFileType());
     }
 
-    public ArticleDTO articleToDtoForClient(Article article) {
-        return new ArticleDTO(article.getId(), article.getAuthor(), article.getTitle(), article.getProgLanguage());
+    public ArticleDTO articleToDtoForClient(Article article,String program_language) {
+        if (program_language == null) return new ArticleDTO (article.getId(),article.getProgLanguage(), article.getAuthor(), article.getTitle(),article.getCreatedAt());
+        return new ArticleDTO(article.getId(), article.getAuthor(), article.getTitle(), article.getProgLanguage(),article.getComments().size(),
+                article.getRatings().size(), getAverageRating(article.getRatings())* 20, article.getCreatedAt());
     }
 
     public CommentDTO commentToDTO(Comment comment) {
@@ -33,7 +34,10 @@ public class Converter {
     }
 
     public RatingDTO ratingToDTO(List<Rating> ratingForArticle, String username) {
-        double averageRating = (ratingForArticle.stream().mapToInt(Rating::getUserScore).sum()*1.0)/(ratingForArticle.size()*1.0);
-        return new RatingDTO(averageRating * 20 , ratingForArticle.size(),ratingForArticle.stream().anyMatch(rating -> rating.getUsername().equals(username)));
+        return new RatingDTO(getAverageRating(ratingForArticle) * 20 , ratingForArticle.size(),ratingForArticle.stream().anyMatch(rating -> rating.getUsername().equals(username)));
+    }
+
+    public double getAverageRating (List<Rating> ratingForArticle) {
+        return (ratingForArticle.stream().mapToInt(Rating::getUserScore).sum()*1.0)/(ratingForArticle.size()*1.0);
     }
 }
