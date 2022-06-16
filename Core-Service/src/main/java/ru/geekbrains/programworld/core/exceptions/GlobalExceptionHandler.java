@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.geekbrains.programworld.api.exceptions.ResourceNotFoundException;
 import ru.geekbrains.programworld.api.exceptions.SiteError;
 
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler
@@ -29,7 +28,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> catchRatingAlreadyExistException(RatingAlreadyExistException e) {
         return new ResponseEntity<>(new RatingAlreadyExistException(e.getMessages()), HttpStatus.BAD_REQUEST);
     }
-
-
-
 }

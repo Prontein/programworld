@@ -40,4 +40,5 @@ public class Converter {
     public double getAverageRating (List<Rating> ratingForArticle) {
         return (ratingForArticle.stream().mapToInt(Rating::getUserScore).sum()*1.0)/(ratingForArticle.size()*1.0);
     }
+
 }

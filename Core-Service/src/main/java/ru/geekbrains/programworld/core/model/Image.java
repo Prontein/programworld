@@ -25,4 +25,5 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
+
 }

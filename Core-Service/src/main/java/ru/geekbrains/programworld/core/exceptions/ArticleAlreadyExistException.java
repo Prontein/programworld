@@ -9,5 +9,6 @@ public class ArticleAlreadyExistException extends RuntimeException{
     public ArticleAlreadyExistException(String messages) {
         this.messages = messages;
     }
+
 }
 

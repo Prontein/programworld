@@ -40,4 +40,5 @@ public class RegistrationController {
         User user = userService.editUserAccount(editProfileDTO, username);
         return new UserDTO(user.getId(), user.getPassword(), user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName());
     }
+
 }

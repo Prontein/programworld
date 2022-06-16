@@ -135,4 +135,5 @@ public class ArticleDTO {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
 }

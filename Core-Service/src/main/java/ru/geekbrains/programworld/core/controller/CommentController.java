@@ -38,4 +38,5 @@ public class CommentController {
     public void deleteComment(@RequestParam(name="comment_Id") Long comment_Id) {
         commentService.deleteComment(comment_Id);
     }
+
 }

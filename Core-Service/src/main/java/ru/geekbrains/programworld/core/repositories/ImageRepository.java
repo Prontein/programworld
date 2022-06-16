@@ -7,5 +7,4 @@ import ru.geekbrains.programworld.core.model.Image;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Long>, JpaSpecificationExecutor<Image>{
-
 }

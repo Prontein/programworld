@@ -12,4 +12,5 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Query(value = "SELECT * FROM ratings where article_id = ?1", nativeQuery = true)
     List<Rating> findAllWithArticleId(Long article_id);
+
 }

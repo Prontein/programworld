@@ -22,4 +22,5 @@ public class ImageController {
     public void deleteImage(@PathVariable Long id) {
         imageService.deleteImage(id);
     }
+
 }

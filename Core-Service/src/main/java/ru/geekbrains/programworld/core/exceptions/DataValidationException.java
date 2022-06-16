@@ -12,4 +12,5 @@ public class DataValidationException extends RuntimeException{
     public List<String> getMessages() {
         return messages;
     }
+
 }

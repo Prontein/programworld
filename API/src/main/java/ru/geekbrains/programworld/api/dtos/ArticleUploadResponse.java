@@ -74,5 +74,4 @@ public class ArticleUploadResponse {
         this.downloadUri = downloadUri;
     }
 
-
 }

@@ -39,5 +39,4 @@ public class SiteError {
     public SiteError(String... messages) {
         this(Arrays.asList(messages));
     }
-
 }

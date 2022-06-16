@@ -25,4 +25,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long>, JpaSpec
     List<Article> findAllByProgLanguageWithComments(@Param("program_language") String program_language);
 
     List<Article> findAllByProgLanguageWithCommentsAndRating(@Param("articlesWithComments") List<Article> articlesWithComments);
+
 }

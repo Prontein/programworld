@@ -34,6 +34,7 @@ public class ArticleService {
         if (articleExists(file.getOriginalFilename())) {
             throw new ArticleAlreadyExistException("Такой файл уже существует: " + file.getOriginalFilename());
         }
+
        Article article = new Article();
         try {
 

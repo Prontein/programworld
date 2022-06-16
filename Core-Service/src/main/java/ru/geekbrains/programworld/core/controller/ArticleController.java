@@ -54,7 +54,6 @@ public class ArticleController {
 
     @PutMapping("/{id}")
     public ArticleUploadResponse editingArticleInDb(@PathVariable Long id,@RequestPart("fileEdit")MultipartFile multipartFile, @RequestPart("selectArticle") ArticleDTO articleDTO) {
-        System.out.println(2654645);
         Article article = articleService.editingInDb(id,multipartFile,articleDTO);
         ArticleUploadResponse articleUploadResponse = new ArticleUploadResponse();
 
@@ -83,4 +82,5 @@ public class ArticleController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + article.getFileName())
                 .body(article.getContent());
     }
+
 }

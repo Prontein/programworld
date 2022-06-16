@@ -29,4 +29,5 @@ public class Rating {
         this.userScore = userScore;
         this.username = username;
     }
+
 }

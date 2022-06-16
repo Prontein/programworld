@@ -37,4 +37,5 @@ public class RatingService {
     public List<Rating> getRatingForArticle(Long article_id) {
         return ratingRepository.findAllWithArticleId(article_id);
     }
+
 }

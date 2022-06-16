@@ -62,4 +62,5 @@ public class ImageService {
         (new File(image.getFileFolder() +"/uploaded_" + image.getFileName())).delete();
         imageRepository.deleteById(id);
     }
+
 }

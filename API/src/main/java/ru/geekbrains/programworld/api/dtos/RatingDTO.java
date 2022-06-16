@@ -79,4 +79,5 @@ public class RatingDTO {
     public void setUserAlreadySetScore(boolean userAlreadySetScore) {
         isUserAlreadySetScore = userAlreadySetScore;
     }
+
 }

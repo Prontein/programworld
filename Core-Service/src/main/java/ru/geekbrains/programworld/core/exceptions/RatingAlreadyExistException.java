@@ -9,4 +9,5 @@ public class RatingAlreadyExistException extends RuntimeException{
     public RatingAlreadyExistException(String messages) {
         this.messages = messages;
     }
+
 }

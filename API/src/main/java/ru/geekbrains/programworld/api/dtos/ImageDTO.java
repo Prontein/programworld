@@ -37,4 +37,5 @@ public class ImageDTO {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
+
 }

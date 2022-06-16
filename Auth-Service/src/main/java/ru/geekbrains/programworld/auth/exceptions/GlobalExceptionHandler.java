@@ -23,4 +23,5 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> catchUserAlreadyExistException(UserAlreadyExistException e) {
         return new ResponseEntity<>(new UserAlreadyExistException(e.getMessages()), HttpStatus.BAD_REQUEST);
     }
+
 }

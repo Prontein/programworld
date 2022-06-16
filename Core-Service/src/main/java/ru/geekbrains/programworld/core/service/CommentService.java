@@ -35,4 +35,5 @@ public class CommentService {
         Comment comment = commentRepository.findById(comment_id).orElseThrow(() -> new ResourceNotFoundException("Comment ID = " + comment_id + " not found"));
         commentRepository.deleteById(comment_id);
     }
+
 }

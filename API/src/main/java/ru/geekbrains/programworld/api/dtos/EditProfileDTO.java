@@ -45,4 +45,5 @@ public class EditProfileDTO {
         this.lastName = lastName;
         this.email = email;
     }
+
 }

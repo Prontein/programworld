@@ -21,4 +21,5 @@ public class UserController {
         User user = userService.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти пользователя. Имя пользователя: " + username));
         return new ProfileDTO(user.getUsername(), user.getFirstName(), user.getLastName(), user.getEmail());
     }
+
 }

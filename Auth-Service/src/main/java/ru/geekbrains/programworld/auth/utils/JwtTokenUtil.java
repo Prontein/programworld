@@ -38,4 +38,5 @@ public class JwtTokenUtil {
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
+
 }

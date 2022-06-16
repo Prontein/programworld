@@ -22,4 +22,5 @@ public class RatingController {
     public void addUserScore(@RequestBody RatingDTO ratingDTO) {
         ratingService.addUserScore(ratingDTO);
     }
+
 }
