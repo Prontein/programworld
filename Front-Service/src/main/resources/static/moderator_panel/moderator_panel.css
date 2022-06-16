@@ -37,11 +37,11 @@
 }
 
 .input-file-dummy, .input-file-btn {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .input-file-dummy[readonly] {
-  background-color: white;
+    background-color: white;
 }
 .article_materials {
     display: flex;

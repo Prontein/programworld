@@ -34,7 +34,6 @@ angular.module('program').controller('program-viewController', function ($localS
                 console.log($scope.article_comment);
                 $scope.article_comment = null;
                 alert("Ваш комментарий успешно добавлен");
-               /* $scope.open();*/
                 $route.reload();
             }, function failureCallback (response) {
                 alert(response.data.messages);

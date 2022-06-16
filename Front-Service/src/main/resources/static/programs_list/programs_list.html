@@ -18,28 +18,30 @@
                 </form>
             </div>
         </div>
+
         <div class="rev_slider" >
             <div class="slide" ng-repeat="a in articles">
                 <div class="slide_inner">
-                        <div class="front">
-                            <div class="slide_inner_line">{{a.author}}</div>
-                            <div class="slide_inner_line" style="margin-top: 30px;">{{a.title}}</div>
-                        </div>
-                        <div class="back">
-                            <div class="back-content">
-                                <p></p>
-                                <div class="slide_inner_line">Комментарии: {{a.numberOfComments}}</div>
-                                <div class="slide_inner_line">Оценки: {{a.numberOfRatings}}</div>
-                                <div class="slide_inner_line" >
-                                    <div class="rate_background">
-                                        <div class="rate_bar" style="width:{{a.averageRating}}%;"></div>
-                                    </div>
-                                </div>
-                                <div class="slide_inner_line">
-                                    <button class="btn btn-primary" ng-click="openProgram(a.id,a.author,a.title)">Открыть</button>
+                    <div class="front">
+                        <div class="slide_inner_line">{{a.author}}</div>
+                        <div class="slide_inner_line" style="margin-top: 30px;">{{a.title}}</div>
+                    </div>
+
+                    <div class="back">
+                        <div class="back-content">
+                            <p></p>
+                            <div class="slide_inner_line">Комментарии: {{a.numberOfComments}}</div>
+                            <div class="slide_inner_line">Оценки: {{a.numberOfRatings}}</div>
+                            <div class="slide_inner_line" >
+                                <div class="rate_background">
+                                    <div class="rate_bar" style="width:{{a.averageRating}}%;"></div>
                                 </div>
                             </div>
+                            <div class="slide_inner_line">
+                                <button class="btn btn-primary" ng-click="openProgram(a.id,a.author,a.title)">Открыть</button>
+                            </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

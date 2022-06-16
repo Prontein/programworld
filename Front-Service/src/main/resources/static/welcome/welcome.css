@@ -11,7 +11,6 @@
      background: -webkit-linear-gradient(left, #8dfbf3, #fbf4f4, #ccf8c5, #ebf1af, #8dfbf3);
      background: linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
      background-size: 3200px 200px;
-
      color: transparent;
      -webkit-background-clip: text;
      -webkit-animation: animate-logo;
@@ -66,7 +65,6 @@
     border-radius: 20px;
     box-shadow: 0 0 6px 4px #dffff8;
     font-size: 21px;
-
 }
 
 .td {

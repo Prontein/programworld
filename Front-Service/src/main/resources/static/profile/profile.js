@@ -38,4 +38,5 @@ angular.module('program').controller('profileController', function ($scope, $htt
       $('.btnText').toggle();
       delete $scope.user_update;
     });
+
 });

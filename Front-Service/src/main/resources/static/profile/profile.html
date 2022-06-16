@@ -14,6 +14,7 @@
                     <input type="text" class="form-control" id="inputUsername" value="{{userProfile.username}}">
                     </fieldset>
                 </div>
+
                 <div class="col-md-4">
                     <fieldset disabled>
                     <label for="inputEmail" class="form-label">Адрес электронной почты</label>
@@ -21,6 +22,7 @@
                     </fieldset>
                 </div>
             </div>
+
             <div class="row g-3">
                 <div class="col-md-4">
                     <fieldset disabled>
@@ -28,6 +30,7 @@
                     <input type="text" class="form-control" id="inputAddress" value="{{userProfile.firstName}}">
                     </fieldset>
                 </div>
+
                 <div class="col-md-4">
                     <fieldset disabled>
                     <label for="inputAddress2" class="form-label">Фамилия</label>
@@ -44,6 +47,7 @@
             </div>
         </form>
         <p></p>
+
         <div ng-show="showBlock">
             <form novalidate ng-submit="updateProfile()">
                 <div class="col-4">
@@ -53,6 +57,7 @@
                     </div>
                 </div>
                 <p></p>
+
                 <div class="col-4">
                     <div class="input-group">
                         <div class="input-group-text">Фамилия</div>
@@ -60,6 +65,7 @@
                     </div>
                 </div>
                 <p></p>
+
                 <div class="col-4">
                     <div class="input-group">
                         <div class="input-group-text">E-mail</div>
@@ -67,6 +73,7 @@
                     </div>
                 </div>
                 <p></p>
+
                 <button type="submit" class="btn btn-primary">Сохранить изменения</button>
             </form>
         </div>

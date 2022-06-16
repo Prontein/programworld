@@ -455,6 +455,7 @@ background: url('img/space1.jpg') right;
     width: 100%;
 }
 /*Форма регистарции*/
+
 .registration-modal-body {
     height:600px;
 }

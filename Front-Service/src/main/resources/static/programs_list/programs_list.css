@@ -135,6 +135,7 @@ text-align: center;
 
 .slide_inner:hover, .slide_inner:focus {
 /*    -webkit-box-reflect: below 30px linear-gradient(transparent,transparent,#0000000f);*/
+
 }
 
 .slide_inner:hover::after, .slide_inner:focus::after {

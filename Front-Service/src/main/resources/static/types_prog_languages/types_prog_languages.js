@@ -23,4 +23,5 @@ angular.module('program').controller('types_prog_languagesController', function 
     }
 
     $scope.getAllArticlesForUser();
+
 });

@@ -1,7 +1,5 @@
-
 angular.module('program').controller('programs_listController', function ($scope, $http,$location,$routeParams,$localStorage) {
     const contextPath = 'http://localhost:5555/core/';
-
 
    $scope.openProgram = function(programId,author,title) {
         $localStorage.author = author;

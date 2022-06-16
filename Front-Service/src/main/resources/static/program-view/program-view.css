@@ -83,6 +83,7 @@
     align-items: center;
     justify-content: flex-end;
 }
+
 /* внешний контейнер - фон с серыми звездочками */
 .rate_background {
     background-size: 26px;

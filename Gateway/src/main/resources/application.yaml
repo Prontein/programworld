@@ -26,14 +26,6 @@ spring:
             - StripPrefix=1
             - PrefixPath=/site-core
             - JwtAuthFilter
-#        - id: cart-service
-#          uri: http://localhost:8191/
-#          predicates:
-#            - Path=/cart/**
-#          filters:
-#            - StripPrefix=1
-#            - PrefixPath=/shop-cart
-#            - JwtAuthFilter
         - id: auth-service
           uri: http://localhost:8183/
           predicates:

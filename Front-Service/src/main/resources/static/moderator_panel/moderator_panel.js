@@ -24,7 +24,6 @@ angular.module('program').controller('moderator_panelController', function ($sco
         }
     }
 
-
     $scope.open = function () {
         $http.get(contextPath + 'api/v1/articles/' + $routeParams.programId)
             .then(function successCallback (response) {

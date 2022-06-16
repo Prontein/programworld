@@ -135,7 +135,6 @@ angular.module('program').controller('indexController', function ($rootScope, $s
         $location.path('/profile');
     }
 
-
     $scope.showPassword = function () {
         if ($scope.passwordType == "password") {
             $scope.passwordType = "text";
